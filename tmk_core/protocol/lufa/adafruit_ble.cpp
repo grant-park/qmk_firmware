@@ -87,6 +87,7 @@ struct queue_item {
     uint16_t consumer;
     struct __attribute__((packed)) {
       int8_t x, y, scroll, pan;
+      uint8_t buttons;
     } mousemove;
   };
 };
@@ -700,7 +701,23 @@ static bool process_queue_item(struct queue_item *item, uint16_t timeout) {
       strcpy_P(fmtbuf, PSTR("AT+BLEHIDMOUSEMOVE=%d,%d,%d,%d"));
       snprintf(cmdbuf, sizeof(cmdbuf), fmtbuf, item->mousemove.x,
           item->mousemove.y, item->mousemove.scroll, item->mousemove.pan);
-      return at_command(cmdbuf, NULL, 0, true, timeout);
+      if (!at_command(cmdbuf, NULL, 0, true, timeout)) {
+              return false;
+            }
+            strcpy_P(cmdbuf, PSTR("AT+BLEHIDMOUSEBUTTON="));
+            if (item->mousemove.buttons & MOUSE_BTN1) {
+              strcat(cmdbuf, "L");
+            }
+            if (item->mousemove.buttons & MOUSE_BTN2) {
+              strcat(cmdbuf, "R");
+            }
+            if (item->mousemove.buttons & MOUSE_BTN3) {
+              strcat(cmdbuf, "M");
+            }
+            if (item->mousemove.buttons == 0) {
+              strcat(cmdbuf, "0");
+            }
+            return at_command(cmdbuf, NULL, 0, true, timeout);
 #endif
     default:
       return true;
@@ -758,7 +775,7 @@ bool adafruit_ble_send_consumer_key(uint16_t keycode, int hold_duration) {
 
 #ifdef MOUSE_ENABLE
 bool adafruit_ble_send_mouse_move(int8_t x, int8_t y, int8_t scroll,
-                                  int8_t pan) {
+                                  int8_t pan, uint8_t buttons) {
   struct queue_item item;
 
   item.queue_type = QTMouseMove;
@@ -766,6 +783,7 @@ bool adafruit_ble_send_mouse_move(int8_t x, int8_t y, int8_t scroll,
   item.mousemove.y = y;
   item.mousemove.scroll = scroll;
   item.mousemove.pan = pan;
+  item.mousemove.buttons = buttons;
 
   while (!send_buf.enqueue(item)) {
     send_buf_send_one();

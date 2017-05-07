@@ -1,4 +1,5 @@
 #include "planck.h"
+#include "mousekey.h"
 //#include "outputselect.h"
  
 
@@ -33,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Lower
 [1] = {
   {KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_PLUS},
-  {KC_TILD, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______, _______, KC_LCBR, KC_RCBR, KC_PIPE},
+  {KC_TILD, KC_F1,   KC_F2,   KC_F3,   _______, _______, _______,   _______, _______, KC_LCBR, KC_RCBR, KC_PIPE},
   {MI_ON,   MI_OFF,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
   {_______  , BL_DEC,  BL_INC,  _______, _______, _______, _______, _______, KC_J,    KC_9,    KC_K,    _______}
 },

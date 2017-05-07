@@ -676,7 +676,7 @@ static void send_mouse(report_mouse_t *report)
 #ifdef ADAFRUIT_BLE_ENABLE
     if (where == OUTPUT_ADAFRUIT_BLE) {
       // FIXME: mouse buttons
-      adafruit_ble_send_mouse_move(report->x, report->y, report->v, report->h);
+      adafruit_ble_send_mouse_move(report->x, report->y, report->v, report->h, report->buttons);
     }
 #endif
 

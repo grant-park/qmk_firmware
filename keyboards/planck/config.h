@@ -23,9 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x6060
-#define MANUFACTURER    Ortholinear Keyboards
-#define PRODUCT         The Planck Keyboard
-#define DESCRIPTION     A compact ortholinear keyboard
+#define MANUFACTURER    Grant Hyun Park 
+#define PRODUCT         Grant's Nordic Yacht 
+#define DESCRIPTION      
 
 /* key matrix size */
 #define MATRIX_ROWS 4
@@ -36,8 +36,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_TIME_TO_MAX    10
 #define MOUSEKEY_MAX_SPEED      5
 #define MOUSEKEY_WHEEL_MAX_SPEED 1
-#define MOUSEKEY_WHEEL_DELAY 200
-#define MOUSEKEY_WHEEL_TIME_TO_MAX 20
+#define MOUSEKEY_WHEEL_DELAY 100
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 5
 
 #define ADAFRUIT_BLE_ENABLE_MODE_LEDS 0
 

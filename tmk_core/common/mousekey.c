@@ -54,7 +54,8 @@ static void mousekey_debug(void);
 static uint8_t move_unit(void) {
     uint16_t unit;
     if (mousekey_accel & _BV(0)) {
-        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed)/4;
+        /*grant change*/
+        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed)/9;
     } else if (mousekey_accel & _BV(1)) {
         unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed)/2;
     } else if (mousekey_accel & _BV(2)) {

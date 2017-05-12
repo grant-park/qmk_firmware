@@ -57,7 +57,7 @@ static uint8_t move_unit(void) {
         /*grant change*/
         unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed)/9;
     } else if (mousekey_accel & _BV(1)) {
-        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed)/2;
+        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed)/3;
     } else if (mousekey_accel & _BV(2)) {
         unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed);
     } else if (mousekey_repeat == 0) {

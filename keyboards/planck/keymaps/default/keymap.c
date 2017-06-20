@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // Raise
 [2] = {
   {KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL },
-  {KC_GRV,  _______, _______, _______, _______, _______, _______, _______, _______, KC_RBRC, KC_LBRC, KC_BSLS},
+  {KC_GRV,  _______, _______, _______, _______, _______, _______, _______, _______, KC_LBRC, KC_RBRC, KC_BSLS},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
@@ -118,6 +118,13 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
           layer_off(5);
       }
       break;
+    // layer 7
+    case 7: 
+      if (record->event.pressed) {
+          layer_on(7);
+      } else {
+          layer_off(7);
+      }
   }
   return MACRO_NONE;
 

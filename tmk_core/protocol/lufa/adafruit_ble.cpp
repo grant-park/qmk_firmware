@@ -551,7 +551,7 @@ bool adafruit_ble_enable_keyboard(void) {
   static const char kATZ[] PROGMEM = "ATZ";
 
   // Turn down the power level a bit
-  static const char kPower[] PROGMEM = "AT+BLEPOWERLEVEL=0";
+  static const char kPower[] PROGMEM = "AT+BLEPOWERLEVEL=-20";
 
 #if !ADAFRUIT_BLE_ENABLE_MODE_LEDS
   static const char kRedLEDOff[] PROGMEM = "AT+HWMODELED=0";

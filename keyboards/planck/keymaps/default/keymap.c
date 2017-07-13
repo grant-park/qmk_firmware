@@ -33,10 +33,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Lower
 
-// CLEAN, SYNC, SEARCH_PROJ, SEARCH_CLASS
+// CLEAN, SYNC, SEARCH_PROJ, SEARCH_CLASS, REFORMAT
 [1] = {
   {KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_PLUS},
-  {KC_TILD, M(3),    M(4),    M(6),    M(7),    _______, _______, _______, _______, KC_LCBR, KC_RCBR, KC_PIPE},
+  {KC_TILD, M(3),    M(4),    M(6),    M(7),    M(8),     _______, _______, _______, KC_LCBR, KC_RCBR, KC_PIPE},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
@@ -119,6 +119,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
           return MACRO(D(LGUI),D(LSFT),T(O),U(LGUI),U(LSFT),END);
       }
       break;
+    case 8:
+      // reformat 
+      if (record->event.pressed) {
+	  return MACRO(D(LALT),D(LGUI),T(L),U(LALT),U(LGUI),END);
+      }
   }
   return MACRO_NONE;
 

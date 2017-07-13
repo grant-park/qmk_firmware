@@ -33,19 +33,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Lower
 
-// CLEAN, SYNC, SEARCH_PROJ, SEARCH_CLASS, REFORMAT
+// CLEAN m3, SYNC m4, SEARCH_PROJ m6, SEARCH_CLASS m7, REFORMAT m8
 [1] = {
   {KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_PLUS},
-  {KC_TILD, M(3),    M(4),    M(6),    M(7),    M(8),     _______, _______, _______, KC_LCBR, KC_RCBR, KC_PIPE},
+  {KC_TILD, M(3),    M(4),    M(6),    M(7),    M(8),    _______, _______, _______, KC_LCBR, KC_RCBR, KC_PIPE},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
 // Raise
+// tmux horiz pane m9, tmux vert pane 10, tmux m11
 [2] = {
   {KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, KC_EQL },
   {KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______, _______, KC_LBRC, KC_RBRC, KC_BSLS},
-  {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, _______, _______, _______},
+  {_______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______, M(11),   M(9),    M(10)  },
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
 
@@ -124,6 +125,25 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
       if (record->event.pressed) {
 	  return MACRO(D(LALT),D(LGUI),T(L),U(LALT),U(LGUI),END);
       }
+      break;
+    case 9:
+      // reformat 
+      if (record->event.pressed) {
+	  return MACRO(D(LCTL),D(F),U(LCTL),U(F),D(LSFT),T(QUOT),U(LSFT),END);
+      }
+      break;
+    case 10:
+      // reformat 
+      if (record->event.pressed) {
+	  return MACRO(D(LCTL),D(F),U(LCTL),U(F),D(LSFT),T(5),U(LSFT),END);
+      }
+      break;
+    case 11:
+      // reformat 
+      if (record->event.pressed) {
+	  return MACRO(D(LCTL),D(F),U(LCTL),U(F),END);
+      }
+      break;
   }
   return MACRO_NONE;
 

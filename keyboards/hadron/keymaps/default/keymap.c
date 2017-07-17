@@ -30,6 +30,15 @@ extern rgblight_config_t rgblight_config;
 #define _ARROWS 10
 #define _ADJUST 16
 
+#define _CLEAN 20
+#define _SYNC 22
+#define _SEARCH_PROJ 24
+#define _SEARCH_CLASS 26
+#define _REFORMAT 28
+#define _HORIZ 30
+#define _VERT 32
+#define _TMUX 34
+
 enum preonic_keycodes {
   QWERTY = SAFE_RANGE,
   COLEMAK,
@@ -46,10 +55,26 @@ enum preonic_keycodes {
   RGBLED_INCREASE_VAL,
   RGBLED_DECREASE_VAL,
   ARROWS,
+  CLEAN,
+  SYNC,
+  SEARCH_PROJ,
+  SEARCH_CLASS,
+  REFORMAT,
+  HORIZ,
+  VERT,
+  TMUX,
 };
 
 enum macro_keycodes {
   KC_DEMOMACRO,
+  KC_CLEAN,
+  KC_SYNC,
+  KC_SEARCH_PROJ,
+  KC_SEARCH_CLASS,
+  KC_REFORMAT,
+  KC_HORIZ,
+  KC_VERT,
+  KC_TMUX,
 };
 
 // Fillers to make layering more clear
@@ -64,7 +89,14 @@ enum macro_keycodes {
 #define LT_MC(kc)   LT(_MOUSECURSOR, kc)        // L-ayer T-ap M-ouse C-ursor
 #define LT_RAI(kc)  LT(_RAISE, kc)              // L-ayer T-ap to Raise
 #define DEMOMACRO   M(KC_DEMOMACRO)            // Sample for macros
-
+#define CLEAN       M(KC_CLEAN)
+#define SYNC        M(KC_SYNC)
+#define SEARCH_PROJ M(KC_SEARCH_PROJ)
+#define SEARCH_CLASS M(KC_SEARCH_CLASS)
+#define REFORMAT    M(KC_REFORMAT)
+#define HORIZ       M(KC_HORIZ) 
+#define VERT        M(KC_VERT)
+#define TMUX        M(KC_TMUX)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -147,7 +179,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_LOWER] = KEYMAP( 
   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_BSPC, \
   KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_PLUS,  KC_LPRN, KC_RPRN, KC_DEL, \
-  KC_TILD, KC_F1,   KC_F2,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, _______, KC_LCBR, KC_RCBR, KC_PIPE,  KC_LBRC, KC_RBRC, KC_PIPE, \
+  KC_TILD, CLEAN,SYNC,SEARCH_PROJ,SEARCH_CLASS,REFORMAT,KC_F10,  _______, _______, KC_LCBR, KC_RCBR, KC_PIPE,  KC_LBRC, KC_RBRC, KC_PIPE, \
   _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  _______, _______, _______, KC_F12,S(KC_NUHS),S(KC_NUBS),_______,_______, _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MNXT, KC_VOLD, KC_VOLU, KC_MPLY \
 ),
@@ -431,6 +463,31 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         if (record->event.pressed){
           return MACRO (I(1), T(H),T(E),T(L), T(L), T(O), T(SPACE), T(W), T(O), T(R), T(L), T(D),  END);
         }  
+    case KC_CLEAN:
+      if (record->event.pressed) {
+          return MACRO(D(LGUI),D(LSFT),T(C),U(LGUI),U(LSFT),END);
+      }
+      break;
+    case KC_SYNC:
+      if (record->event.pressed) {
+         return MACRO(D(LGUI),D(LALT),T(S),U(LALT),U(LGUI),END);
+      }
+      break;
+    case KC_SEARCH_PROJ:
+      if (record->event.pressed) {
+        return MACRO(D(LGUI),D(LSFT),T(F),U(LGUI),U(LSFT),END);
+      }
+      break;
+    case KC_SEARCH_CLASS:
+      if (record->event.pressed) {
+         return MACRO(D(LGUI),D(LSFT),T(O),U(LGUI),U(LSFT),END);
+      }
+      break;
+    case KC_REFORMAT:
+      if (record->event.pressed) {
+         return MACRO(D(LALT),D(LGUI),T(L),U(LALT),U(LGUI),END);
+      }
+      break;
     }
 
     return MACRO_NONE;

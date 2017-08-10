@@ -43,7 +43,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Planck PCB default pin-out */
 #define MATRIX_ROW_PINS { F7, F6, F5, F4 }
-#define MATRIX_COL_PINS { D0, C7, D6, B7, B6, B5, D7, C6, D3, D2, F0, F1}
+#define MATRIX_COL_PINS { D6, B7, B6, B5, D7, C6, D0, C7, D3, D2, F0, F1}
 #define UNUSED_PINS
 
 #define AUDIO_VOICES

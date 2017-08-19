@@ -33,10 +33,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // Lower
 
-// CLEAN m3, SYNC m4, SEARCH_PROJ m6, SEARCH_CLASS m7, REFORMAT m8
+// CLEAN m3, SYNC m4, SEARCH_PROJ m6, SEARCH_CLASS m7, REFORMAT m8, OPTIMIZE_IMPORTS
 [1] = {
   {KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS, KC_PLUS},
-  {KC_TILD, M(3),    M(4),    M(6),    M(7),    M(8),    _______, _______, _______, KC_LCBR, KC_RCBR, KC_PIPE},
+  {KC_TILD, M(3),    M(4),    M(6),    M(7),    M(8),    M(12),    _______, _______, KC_LCBR, KC_RCBR, KC_PIPE},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
   {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
 },
@@ -144,21 +144,13 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 	  return MACRO(D(LCTL),D(F),U(LCTL),U(F),END);
       }
       break;
+    case 12:
+      // optimize 
+      if (record->event.pressed) {
+	  return MACRO(D(LCTL),D(LALT),T(O),U(LALT),U(LCTL),END);
+      }
+      break;
   }
   return MACRO_NONE;
 
 };
-
-//void matrix_init_user() {
-//  _delay_ms(500); // give time for usb to initialize
-//
-//  // auto detect output on init
-//#ifdef MODULE_ADAFRUIT_BLE
-//  uint8_t output = auto_detect_output();
-//  if (output == OUTPUT_USB) {
-//    set_output(OUTPUT_USB);
-//  } else {
-//    set_output(OUTPUT_BLUETOOTH);
-//  }
-//#endif
-//}

@@ -23,8 +23,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x6060
-#define MANUFACTURER    Grant Hyun Park 
-#define PRODUCT         Grant's Nordic Yacht 
+#define MANUFACTURER    "Grant Hyun Park" 
+#define PRODUCT         "Grant's Nordic Yacht" 
 #define DESCRIPTION      
 
 /* key matrix size */

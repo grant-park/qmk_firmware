@@ -1,20 +1,20 @@
 #include "planck.h"
 #include "mousekey.h"
 #define _______ KC_TRNS
-
+/** todo individual tapping terms for individual keys and macros **/
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = {
         {KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______, _______,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P},
-        {KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    _______, _______,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN},
-        {KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______, _______,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH },
-        {KC_ESC,  KC_TAB,  KC_LCTL, M(1),    KC_ENT,  KC_LSFT, KC_RGUI,    KC_SPC,  M(2),    KC_RALT, KC_QUOT, KC_BSPC}
+        {KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    _______, _______,    KC_H,    KC_J,    KC_K,    KC_L,    LT(M(7), KC_SCLN)},
+        {KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    _______, _______,    KC_N,    KC_M,    MT(MOD_LALT, KC_COMM), KC_DOT,  LT(M(3), KC_SLSH)},
+        {_______, _______, _______, LT(M(1), KC_ESC), MT(MOD_LGUI, KC_ENT),  MT(MOD_LSFT, KC_TAB), MT(MOD_RCTL, KC_QUOT),    KC_SPC,  LT(M(2), KC_BSPC),    _______, _______, _______}
     }, 
 
     [1] = {
-        {KC_GRV , _______, _______, _______, _______, _______, _______, _______, M(4),    KC_UP,   M(5)    ,KC_PLUS},
-        {KC_TILD,  _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT,KC_UNDS},
-        {KC_BSLS,  _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_EQL, KC_MINS},
-        {_______, _______, _______, _______, _______, _______, _______,    M(6), M(3),    _______, _______, KC_PIPE}
+        {KC_GRV,  _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______ ,KC_PLUS},
+        {KC_TILD, _______, _______, _______, _______, _______, _______, _______, M(4),     M(5),  _______,  KC_UNDS},
+        {KC_BSLS, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_EQL, KC_MINS},
+        {_______, _______, _______, _______, _______, _______, _______, M(6),    M(3),    _______, _______, KC_PIPE}
     },
 
     [2] = {
@@ -25,8 +25,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     },
 
     [3] = {
-        {RESET, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, _______, _______, _______, _______, KC_MS_U, _______, _______},
+        {RESET, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, _______, _______, _______, KC_WH_U, KC_MS_U, KC_WH_D, _______},
         {KC_ACL0, KC_ACL1, KC_BTN1, KC_BTN2, KC_BTN3, _______, _______, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______},
+        {KC_VOLD, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
+        {_______, _______, _______, _______, _______, _______, _______, KC_BTN1, KC_BTN2, _______, _______, _______}
+    },
+
+    [7] = {
+        {_______, _______, _______, _______, _______, _______, _______, _______, _______, KC_UP, _______, _______},
+        {_______, _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT, _______},
         {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
         {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
     }
@@ -38,11 +45,13 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
             if (record->event.pressed) {
                 layer_on(1);
             } else {
+                layer_off(3);
                 layer_off(1);
             }
             break;
         case 2:
             if (record->event.pressed) {
+                layer_off(3);
                 layer_on(2);
             } else {
                 layer_off(3);
@@ -54,7 +63,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 layer_on(3);
             } else {
                 layer_off(3);
-                layer_off(2);
             }
             break;
         case 4:
@@ -66,7 +74,13 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
         case 6:
             return MACRODOWN( DOWN(KC_RGUI), TYPE(KC_SPC), UP(KC_RGUI), END);
             break;
-
+        case 7:
+            if (record->event.pressed) {
+                layer_on(7);
+            } else {
+                layer_off(7);
+            }
+            break;
     }
     return MACRO_NONE;
 };

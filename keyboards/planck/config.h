@@ -27,6 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT         "Grant's Nordic Yacht" 
 #define DESCRIPTION      
 
+
 /* key matrix size */
 #define MATRIX_ROWS 4
 #define MATRIX_COLS 12
@@ -38,6 +39,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_WHEEL_MAX_SPEED 1
 #define MOUSEKEY_WHEEL_DELAY 100
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 5
+
+#undef TAPPING_TERM
+#define TAPPING_TERM 267
+#define PREVENT_STUCK_MODIFIERS
+#define IGNORE_MOD_TAP_INTERRUPT
+#define PERMISSIVE_HOLD
 
 #define ADAFRUIT_BLE_ENABLE_MODE_LEDS 0
 

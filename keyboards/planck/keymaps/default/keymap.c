@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [7] = {
         {_______, _______, _______, _______, _______, _______, _______, _______, _______, KC_UP, _______, _______},
-        {_______, _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT, _______},
+        {M(8)   , M(9)   , M(10)  , M(11)  , M(12)  , _______, _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT, _______},
         {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
         {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
     }
@@ -81,6 +81,36 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 layer_off(7);
             }
             break;
+	case 8:
+	    if (record->event.pressed) {
+		// clean
+		return MACRO(D(LGUI),D(LSFT),T(C),U(LGUI),U(LSFT),END);
+	    }
+	    break;
+	case 9:
+	    if (record->event.pressed) {
+		// sync
+		return MACRO(D(LGUI),D(LALT),T(S),U(LALT),U(LGUI),END);
+	    }
+	    break;
+	case 10:
+	    if (record->event.pressed) {
+		// search proj
+		return MACRO(D(LGUI),D(LSFT),T(F),U(LGUI),U(LSFT),END);
+	    }
+	    break;
+	case 11:
+	    if (record->event.pressed) {
+		// search class
+		return MACRO(D(LGUI),D(LSFT),T(O),U(LGUI),U(LSFT),END);
+	    }
+	    break;
+	case 12:
+	    if (record->event.pressed) {
+		// reformat
+		return MACRO(D(LALT),D(LGUI),T(L),U(LALT),U(LGUI),END);
+	    }
+	    break;
     }
     return MACRO_NONE;
 };

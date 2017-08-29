@@ -1,7 +1,7 @@
 #include "planck.h"
 #include "mousekey.h"
 #define _______ KC_TRNS
-/** todo individual tapping terms for individual keys and macros **/
+/** todo individual tapping terms for individual keys and macros, e.g. tapping term for shift can drastically decrease in comparison to other keys **/
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = {
         {KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    _______, _______,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P},
@@ -33,7 +33,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     [7] = {
         {_______, _______, _______, _______, _______, _______, _______, _______, _______, KC_UP, _______, _______},
-        {M(8)   , M(9)   , M(10)  , M(11)  , M(12)  , _______, _______, _______, KC_LEFT, KC_DOWN, KC_RIGHT, _______},
+        {M(8)   , M(9)   , M(10)  , M(11)  , M(12)  , _______, _______, M(13),   KC_LEFT, KC_DOWN, KC_RIGHT, _______},
         {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______},
         {_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______}
     }

@@ -4,24 +4,24 @@
 /** todo individual tapping terms for individual keys and macros, e.g. tapping term for shift can drastically decrease in comparison to other keys **/
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = {
-        {KC_Q,    KC_W,    KC_E,    KC_R,                 KC_T,              _______,              _______,               KC_Y,              KC_U,                     KC_I,    KC_O,    KC_P              },
-        {KC_A,    KC_S,    KC_D,    KC_F,                 KC_G,              _______,              _______,               KC_H,              KC_J,                     KC_K,    KC_L,    LT(M(7), KC_SCLN) },
-        {KC_Z,    KC_X,    KC_C,    KC_V,                 KC_B,              _______,              _______,               KC_N,              KC_M,                     KC_COMM, KC_DOT,  LT(M(3), KC_SLSH) },
-        {_______, _______, _______, MT(MOD_LGUI, KC_ESC), LT(M(1), KC_ENT),  MT(MOD_LSFT, KC_TAB), MT(MOD_RCTL, KC_BSPC), LT(M(2), KC_SPC),  MT(MOD_LALT, KC_QUOT),    _______, _______, _______           }
+        {KC_Q,    KC_W,    KC_E,    KC_R,     KC_T,             _______,  _______,               KC_Y,     KC_U,  KC_I,    KC_O,    KC_P              },
+        {KC_A,    KC_S,    KC_D,    KC_F,     KC_G,             _______,  _______,               KC_H,     KC_J,  KC_K,    KC_L,    LT(M(7), KC_SCLN) },
+        {KC_Z,    KC_X,    KC_C,    KC_V,     KC_B,             _______,  _______,               KC_N,     KC_M,  KC_COMM, KC_DOT,  LT(M(3), KC_SLSH) },
+        {KC_ESC,  KC_TAB,  KC_LALT, KC_LGUI,  LT(M(1), KC_ENT), KC_LSFT,  MT(MOD_RCTL, KC_BSPC), KC_SPC,   M(2),  KC_EQL,  KC_MINS, KC_QUOT           }
     }, 
 
     [1] = {
-        {KC_GRV,  _______, _______, M(14), _______, _______, _______, _______, _______, _______,   _______ ,KC_PLUS},
-        {KC_TILD, _______, _______, _______, _______, _______, _______, _______, M(4),     M(5),  KC_EQL,  KC_MINS},
-        {KC_BSLS, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_PIPE, KC_UNDS},
-        {_______, _______, _______, _______, _______, _______, M(6),    M(3),    _______, _______, _______, _______}
+        {KC_GRV,  _______, _______, M(14), _______, _______, _______, _______, _______, _______,   _______, _______},
+        {KC_TILD, _______, _______, _______, _______, _______, _______, _______, M(4),     M(5),   _______, _______},
+        {KC_PIPE, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_BSLS},
+        {_______, _______, _______, _______, _______, _______, M(6),    M(3),    _______, KC_PLUS, KC_UNDS, LSFT(KC_QUOT)}
     },
 
     [2] = {
         {KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    _______, _______, KC_6,   KC_7,    KC_8,    KC_9,    KC_0 },
         {KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, _______, _______, KC_CIRC,KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN},
         {KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   _______, _______, KC_F6,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR},
-        {_______, _______, _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11, KC_F12, _______, _______, _______}
+        {_______, _______, _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11, KC_F12, KC_PLUS, KC_UNDS, LSFT(KC_QUOT)}
     },
 
     [3] = {

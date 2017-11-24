@@ -228,6 +228,7 @@ bool process_tapping(keyrecord_t *keyp)
         if (WITHIN_TAPPING_TERM(event)) {
             if (event.pressed) {
                 if (IS_TAPPING_KEY(event.key)) {
+#ifndef TAPPING_FORCE_HOLD
                     if (!tapping_key.tap.interrupted && tapping_key.tap.count > 0) {
                         // sequential tap.
                         keyp->tap = tapping_key.tap;
@@ -242,6 +243,9 @@ bool process_tapping(keyrecord_t *keyp)
                         tapping_key = *keyp;
                         return true;
                     }
+#endif
+                    tapping_key = *keyp;
+                    return true;
                 } else if (is_tap_key(event.key)) {
                     // Sequential tap can be interfered with other tap key.
                     debug("Tapping: Start with interfering other tap.\n");

@@ -5,9 +5,9 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = {
         {KC_Q,    KC_W,    KC_E,    KC_R,     KC_T,             _______,                 _______,               KC_Y,     KC_U,  KC_I,    KC_O,    KC_P              },
-        {KC_A,    LT(M(3), KC_S),    KC_D,    MT(MOD_LGUI, KC_F),     KC_G,    _______,                 _______,               KC_H,     MT(MOD_LGUI, KC_J),  KC_K,    KC_L,    LT(M(7), KC_SCLN) },
+        {KC_A,    LT(M(3), KC_S),    KC_D,    MT(MOD_LGUI, KC_F),     MT(MOD_RCTL, KC_G),    _______,                 _______,               MT(MOD_RCTL, KC_H),     MT(MOD_LGUI, KC_J),  KC_K,    KC_L,    LT(M(7), KC_SCLN) },
         {KC_Z,    KC_X,    KC_C,    KC_V,     MT(MOD_LALT, KC_B),              _______,                 _______,               MT(MOD_LALT, KC_N),     KC_M,  KC_COMM, KC_DOT,  KC_SLSH },
-        {KC_LCBR, KC_DQT,  KC_PPLS, KC_EQL,  LT(M(1), KC_ENT), MT(MOD_LSFT, KC_ESC),    MT(MOD_RCTL, KC_BSPC), LT(M(2), KC_SPC),  KC_UNDS,  KC_MINS,  KC_QUOT, KC_RCBR           }
+        {M(17), M(16),  KC_PPLS, KC_EQL,  LT(M(1), KC_ENT), MT(MOD_LSFT, KC_ESC),    KC_BSPC, LT(M(2), KC_SPC),  M(15),  KC_MINS,  KC_QUOT, M(18)           }
     }, 
 
     [1] = {
@@ -121,6 +121,42 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	    if (record->event.pressed) {
 		// vim search replace
 		return MACRO(T(S),T(SLSH),T(BSLS),D(LSFT),T(PERC),U(LSFT),D(LSFT),T(V),U(LSFT),END);
+	    }
+	    break;
+	case 15:
+	    if (record->event.pressed) {
+		// unds 
+		return MACRO(D(LSFT),T(MINS),U(LSFT),END);
+	    }
+	    break;
+	case 16:
+	    if (record->event.pressed) {
+		// dqt 
+		return MACRO(D(LSFT),T(QUOT),U(LSFT),END);
+	    }
+	    break;
+	case 17:
+	    if (record->event.pressed) {
+		// lbrc 
+		return MACRO(D(LSFT),T(LBRC),U(LSFT),END);
+	    }
+	    break;
+	case 18:
+	    if (record->event.pressed) {
+		// rbrc 
+		return MACRO(D(LSFT),T(RBRC),U(LSFT),END);
+	    }
+	    break;
+	case 19:
+	    if (record->event.pressed) {
+		// lprn 
+		return MACRO(D(LSFT),T(9),U(LSFT),END);
+	    }
+	    break;
+	case 20:
+	    if (record->event.pressed) {
+		// rprn 
+		return MACRO(D(LSFT),T(0),U(LSFT),END);
 	    }
 	    break;
     }

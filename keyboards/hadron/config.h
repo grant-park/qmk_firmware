@@ -27,7 +27,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define PRODUCT         Hadron Keyboard
 #define DESCRIPTION     A cherry ML ortholinear keyboard
 
-
+  
+#define PREVENT_STUCK_MODIFIERS
+#define IGNORE_MOD_TAP_INTERRUPT
+#define TAPPING_FORCE_HOLD
 
 
 //#define AUDIO_VOICES	

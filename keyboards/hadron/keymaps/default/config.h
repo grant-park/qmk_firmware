@@ -3,9 +3,16 @@
 
 #include "../../config.h"
 
-#define LEADER_TIMEOUT 300
-//#define BACKLIGHT_BREATHING
+#define LEADER_TIMEOUT 50 
 #define PREVENT_STUCK_MODIFIERS
+
+#define MOUSEKEY_INTERVAL       20
+#define MOUSEKEY_DELAY          0
+#define MOUSEKEY_TIME_TO_MAX    10
+#define MOUSEKEY_MAX_SPEED      5
+#define MOUSEKEY_WHEEL_MAX_SPEED 1
+#define MOUSEKEY_WHEEL_DELAY 100
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 5
 
 #define USE_I2C
 #define SSD1306OLED

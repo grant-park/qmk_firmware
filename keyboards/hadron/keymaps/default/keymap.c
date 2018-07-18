@@ -140,13 +140,14 @@ enum macro_keycodes {
 #define sh(X) LSFT(X)
 #define shifty(X) LT(MO(_SHIFTY), X)
 #define md(X) LGUI(LSFT(LALT(X)))
+#define lcalt(x) MT(MOD_LCTL | MOD_LALT, x)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT( 
-  _______,    LGUI(KC_1), LGUI(KC_2),   LGUI(KC_3),   LGUI(KC_4),     LGUI(KC_5),           LGUI(KC_6), LGUI(KC_7), LGUI(KC_8),          LGUI(KC_9),    LGUI(KC_0),  RGB_TOG,\
+  _______,    LCTL(KC_1), LCTL(KC_2),   LCTL(KC_3),   LCTL(KC_4),     LCTL(KC_5),           LCTL(KC_6), LCTL(KC_7), LCTL(KC_8),          LCTL(KC_9),    LCTL(KC_0),  RGB_TOG,\
   KC_DQT,     KC_Q,       KC_W,         KC_E,         KC_R,           KC_T,                 RGB_TOG,    RGB_MOD,    _______,             KC_Y,          KC_U,        KC_I,        KC_O,         KC_P,             KC_QUOT, \
   KC_LPRN,    KC_A,       mouse(KC_S),  lower(KC_D),  lgui(KC_F),     lctl(KC_G),           KC_MPRV,    KC_MPLY,    KC_MNXT,             lctl(KC_H),    lgui(KC_J),  tex(KC_K),   codify(KC_L), arrows(KC_SCLN),  KC_RPRN, \
-  KC_LCBR,    KC_Z,       KC_X,         KC_C,         KC_V,           lalt(KC_B),           md(KC_E),   md(KC_R),   TG(MO(_GAME)),       lalt(KC_N),    KC_M,        KC_COMM,     KC_DOT,       lsft(KC_BSLS),    KC_RCBR, \
+  KC_LCBR,    lsft(KC_Z), KC_X,         KC_C,         lcalt(KC_V),    lalt(KC_B),           KC_F1,      KC_F2,      TG(MO(_GAME)),       lalt(KC_N),    lcalt(KC_M), KC_COMM,     KC_DOT,       lsft(KC_BSLS),    KC_RCBR, \
   KC_LBRC,    KC_LBRC,    KC_LALT,      M(PLUS),      lower(KC_EQL),  shifty(KC_ENT),       KC_VOLD,    KC_MUTE,    KC_VOLU,             raise(KC_SPC), M(UNDS),     KC_MINS,     KC_SLSH,      KC_RBRC,          KC_RBRC \
 ),
 [_GAME] = LAYOUT( 
@@ -167,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______,  _______,  _______, _______,     _______,      _______, _______, _______, _______, _______, _______, \
   _______, KC_1,    KC_2,      KC_3,    KC_4,        KC_5,         _______, _______, _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
   _______, KC_EXLM, KC_AT,     KC_HASH, KC_DLR,      KC_PERC,      _______, _______, _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______, \
-  _______, KC_QUOT, KC_TAB,    KC_TILD, KC_SLSH,     KC_PIPE,      _______, _______, _______, KC_GRV, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______, \
+  _______, KC_QUOT, KC_TAB,    sh(KC_GRV), KC_SLSH,     KC_PIPE,      _______, _______, _______, KC_GRV, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______, \
   _______, _______, _______,   _______, RCTL(KC_SLSH),     KC_ESC,       _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 [_MOUSECURSOR] = LAYOUT( 

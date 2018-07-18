@@ -23,17 +23,33 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 /* USB Device descriptor parameter */
 #define VENDOR_ID       0xFEED
 #define PRODUCT_ID      0x6060
+<<<<<<< HEAD
 #define MANUFACTURER    OLKB
 #define PRODUCT         Planck
 #define DESCRIPTION     A compact ortholinear keyboard
+=======
+#define MANUFACTURER    Grant Hyun Park 
+#define PRODUCT         Grant's Nordic Yacht 
+#define DESCRIPTION      
+>>>>>>> ff58bedf1d4b580447a0cb24e4336a267c4cdf3c
 
 /* key matrix size */
 #define MATRIX_ROWS 4
 #define MATRIX_COLS 12
 
+#define MOUSEKEY_INTERVAL       20
+#define MOUSEKEY_DELAY          0
+#define MOUSEKEY_TIME_TO_MAX    10
+#define MOUSEKEY_MAX_SPEED      5
+#define MOUSEKEY_WHEEL_MAX_SPEED 1
+#define MOUSEKEY_WHEEL_DELAY 100
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 5
+
+#define ADAFRUIT_BLE_ENABLE_MODE_LEDS 0
+
 /* Planck PCB default pin-out */
-#define MATRIX_ROW_PINS { D0, D5, B5, B6 }
-#define MATRIX_COL_PINS { F1, F0, B0, C7, F4, F5, F6, F7, D4, D6, B4, D7 }
+#define MATRIX_ROW_PINS { F4, F5, F6, F7 }
+#define MATRIX_COL_PINS { F1, D2, F0, D3, D1, D0, C6, D7, B5, B6, B7, D6 }
 #define UNUSED_PINS
 
 #define QMK_ESC_OUTPUT F1
@@ -42,7 +58,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define QMK_SPEAKER C6
 
 #define AUDIO_VOICES
-#define C6_AUDIO
 
 #define BACKLIGHT_PIN B7
 

@@ -53,6 +53,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
 #define PREVENT_STUCK_MODIFIERS
+#define IGNORE_MOD_TAP_INTERRUPT
+#define TAPPING_FORCE_HOLD
+#define MOUSEKEY_INTERVAL       20
+#define MOUSEKEY_DELAY          0
+#define MOUSEKEY_TIME_TO_MAX    10
+#define MOUSEKEY_MAX_SPEED      5
+#define MOUSEKEY_WHEEL_MAX_SPEED 1
+#define MOUSEKEY_WHEEL_DELAY 100
+#define MOUSEKEY_WHEEL_TIME_TO_MAX 5
 
 /* disable debug print */
 //#define NO_DEBUG

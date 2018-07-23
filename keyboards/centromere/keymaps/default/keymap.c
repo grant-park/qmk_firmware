@@ -57,15 +57,15 @@ enum macro_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = {
 	{KC_DQT,  KC_Q,       KC_W,          KC_E,           KC_R,       KC_T,       XXXXXXX, XXXXXXX, KC_Y,       KC_U,       KC_I,          KC_O,    KC_P,            KC_QUOT},
-	{KC_LPRN, KC_A,       mouse(KC_S),   lower(KC_D),    lgui(KC_F), lctl(KC_G), XXXXXXX, XXXXXXX, lctl(KC_H), lgui(KC_J), KC_K,          KC_L,    arrows(KC_SCLN), KC_RPRN},
+	{KC_LPRN, KC_A,       mouse(KC_S),   lower(KC_D),    lgui(KC_F), lctl(KC_G), XXXXXXX, XXXXXXX, lctl(KC_H), lgui(KC_J), lower(KC_K),   KC_L,    arrows(KC_SCLN), KC_RPRN},
 	{KC_LCBR, lsft(KC_Z), KC_X,          KC_C,           KC_V,       lalt(KC_B), XXXXXXX, XXXXXXX, lalt(KC_N), KC_M,       KC_COMM,       KC_DOT,  lsft(KC_BSLS),   KC_RCBR},
     {XXXXXXX, XXXXXXX,    lower(KC_EQL), shifty(KC_ENT), KC_2,       M(PLUS),    XXXXXXX, XXXXXXX, KC_MINS,    KC_3,       raise(KC_SPC), M(UNDS), XXXXXXX,         XXXXXXX},
 	{XXXXXXX, XXXXXXX,    XXXXXXX,       XXXXXXX,        XXXXXXX,    XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,       XXXXXXX, XXXXXXX,         XXXXXXX }
 }, 
 
 [_LOWER] = {
-  {_______, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______,    _______,     _______,      _______,     _______, _______},
-  {_______, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX, M(VIMLEFT), M(VIMDOWN),  M(VIMUP),     M(VIMRIGHT), _______, _______},
+  {KC_VOLD, KC_VOLU, KC_MUTE, KC_F14,  KC_F15,  _______, XXXXXXX, XXXXXXX, _______,    _______,     _______,      _______,     _______, _______},
+  {KC_MPRV, KC_MPLY, KC_MNXT, _______, _______, _______, XXXXXXX, XXXXXXX, M(VIMLEFT), M(VIMDOWN),  M(VIMUP),     M(VIMRIGHT), _______, _______},
   {_______, _______, _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______,    M(FOX_LEFT), M(FOX_RIGHT), _______,     _______, _______},
   {XXXXXXX, XXXXXXX, _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______,    _______,     _______,      _______,     XXXXXXX, XXXXXXX},
   {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,     XXXXXXX,      XXXXXXX,     XXXXXXX, XXXXXXX}

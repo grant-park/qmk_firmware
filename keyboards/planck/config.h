@@ -46,8 +46,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define ADAFRUIT_BLE_ENABLE_MODE_LEDS 0
 
 /* Planck PCB default pin-out */
-#define MATRIX_ROW_PINS { F7, F6, F5, F4 }
-#define MATRIX_COL_PINS { C7, D6, B7, B6, D7, C6, D0, D1, D3, D2, F0, F1 }
+#define MATRIX_ROW_PINS { F4, F5, F6, F1 }
+#define MATRIX_COL_PINS { F7, F0, D2, D3, C7, D6, B7, B6, B5, D7, C6, D0 }
 #define UNUSED_PINS
 
 #define AUDIO_VOICES

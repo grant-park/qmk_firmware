@@ -1,5 +1,4 @@
 #include "mitosis.h"
-#include "mousekey.h"
 #define _______ KC_TRNS
 #define USEDKEY KC_TRNS
 #define GUI(X) MT(MOD_LGUI, X)
@@ -8,16 +7,14 @@
 #define CTL(X) MT(MOD_LCTL, X)
 #define L(X,Y) LT(M(X), Y)
 
-/** todo individual tapping terms for individual keys and macros, e.g. tapping term for shift can drastically decrease in comparison to other keys **/
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [0] = {
-        {KC_Q,      KC_W,      KC_E,       KC_R,       KC_T,        KC_Y,        KC_U,      KC_I,      KC_O,    KC_P    },
-        {KC_A,      L(3,KC_S), L(1,KC_D),  GUI(KC_F),  CTL(KC_G),   CTL(KC_H),   GUI(KC_J), L(1,KC_K), KC_L,    L(7,KC_SCLN) },
-        {M(15),     KC_X,      KC_C,       L(9,KC_V),  ALT(KC_B),   ALT(KC_N),   L(9,KC_M), KC_COMM,   KC_DOT,  SFT(KC_BSLS) },
-        {XXXXXXX,   XXXXXXX,   XXXXXXX,    XXXXXXX,    L(8,KC_ENT), L(2,KC_SPC), XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX },
-        {XXXXXXX,   XXXXXXX,   XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX,     XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX }
+        {KC_Q,    KC_W,      KC_E,       KC_R,       KC_T,        KC_Y,        KC_U,      KC_I,      KC_O,    KC_P    },
+        {KC_A,    L(3,KC_S), L(1,KC_D),  GUI(KC_F),  CTL(KC_G),   CTL(KC_H),   GUI(KC_J), L(1,KC_K), KC_L,    L(7,KC_SCLN) },
+        {M(15),   KC_X,      KC_C,       L(9,KC_V),  ALT(KC_B),   ALT(KC_N),   L(9,KC_M), KC_COMM,   KC_DOT,  SFT(KC_BSLS) },
+        {XXXXXXX, XXXXXXX,   XXXXXXX,    XXXXXXX,    L(8,KC_ENT), L(2,KC_SPC), XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX },
+        {XXXXXXX, XXXXXXX,   XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX,     XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX }
     }, 
-    
 
     [1] = {
         {KC_GRV,  KC_F1,   KC_F2,   KC_F3,   _______, _______, _______, _______, _______, M(16)},
@@ -44,9 +41,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     },
 
     [7] = {
-        {_______, _______, _______, _______, _______, _______, _______, KC_UP,   _______,  _______},
+        {M(25),   M(26),   _______, _______, _______, _______, _______, KC_UP,   _______,  _______},
         {M(8)   , M(9)   , M(10)  , M(11)  , M(12)  , M(13),   KC_LEFT, KC_DOWN, KC_RIGHT, USEDKEY},
-        {_______, _______, _______, _______, _______, _______, _______, _______, _______,  _______},
+        {_______, M(27),   _______, _______, _______, _______, _______, _______, _______,  _______},
         {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX},
         {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX }
     },
@@ -95,16 +92,19 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
             }
             break;
         case 4:
+            // vim down 9
 	        if (record->event.pressed) {
             return MACRO( T(9), T(J), END);
             }
             break;
         case 5:
+            // vim up 9
 	        if (record->event.pressed) {
             return MACRO( T(9), T(K), END);
             }
             break;
         case 6:
+            // spotlight
 	        if (record->event.pressed) {
             return MACRO( D(RGUI), T(SPC), U(RGUI), END);
             }
@@ -195,11 +195,13 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	        }
 	        break;
         case 21:
+            // vim left 9
 	        if (record->event.pressed) {
             return MACRO( T(9), T(H), END);
             }
             break;
         case 22:
+            // vim right 9
 	        if (record->event.pressed) {
             return MACRO( T(9), T(L), END);
             }
@@ -216,6 +218,24 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
             return MACRO(D(LCTL),T(TAB),U(LCTL),END);
             }
             break;
-        }
+        case 25:
+            // vim quit
+	        if (record->event.pressed) {
+            return MACRO(D(LSFT),T(SCLN),U(LSFT),T(Q),T(ENT),END);
+            }
+            break;
+        case 26:
+            // vim save
+	        if (record->event.pressed) {
+            return MACRO(D(LSFT),T(SCLN),U(LSFT),T(W),T(ENT),END);
+            }
+            break;
+        case 27:
+            // vim save and exit
+	        if (record->event.pressed) {
+            return MACRO(D(LSFT),T(SCLN),U(LSFT),T(X),T(ENT),END);
+            }
+            break;
+      }
         return MACRO_NONE;
 };

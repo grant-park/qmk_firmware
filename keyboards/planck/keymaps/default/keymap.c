@@ -62,9 +62,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ESC,  XXXXXXX, XXXXXXX, USEDKEY, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX}
     },
     [MIDDLE] = {
-        {KC_GRV,  KC_F1,   KC_F2,   KC_F3,   _______, XXXXXXX, XXXXXXX, _______,  _______,  _______,   _______,   M(DQT)},
-        {KC_TILD, KC_F4,   KC_F5,   KC_F6,   _______, XXXXXXX, XXXXXXX, M(VLEFT), M(VDOWN), M(VUP),    M(VRIGHT), KC_QUOT},
-        {KC_PIPE, KC_F7,   KC_F8,   KC_F9,   _______, XXXXXXX, XXXXXXX, _______,  M(FLEFT), M(FRIGHT), _______,   KC_SLSH},
+        {KC_GRV,  KC_F1,   KC_F2,   KC_F3,    _______, XXXXXXX, XXXXXXX, _______,  _______,  _______,   _______,   M(DQT)},
+        {KC_TILD, KC_F4,   KC_F5,   KC_F6,    _______, XXXXXXX, XXXXXXX, M(VLEFT), M(VDOWN), M(VUP),    M(VRIGHT), KC_QUOT},
+        {KC_PIPE, KC_F7,   KC_F8,   KC_F9,    _______, XXXXXXX, XXXXXXX, _______,  M(FLEFT), M(FRIGHT), _______,   KC_SLSH},
         {XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______,  XXXXXXX,  XXXXXXX,   XXXXXXX,   XXXXXXX}
     },
     [MOUSE] = {
@@ -89,6 +89,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
     switch(id) {
+        // Symbols
+	    case UNDS:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),T(MINS),U(LSFT),END);
+	        }
+	        break;
+	    case DQT:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),T(QUOT),U(LSFT),END);
+	        }
+	        break;
+
+        // Vim
         case VUP:
 	        if (record->event.pressed) {
                 return MACRO( T(9), T(K), END);
@@ -114,6 +127,20 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	    	    return MACRO(T(S),T(SLSH),T(BSLS),D(LSFT),T(PERC),U(LSFT),D(LSFT),T(V),U(LSFT),END);
 	        }
 	        break;
+    
+        // Firefox
+        case FLEFT:
+	        if (record->event.pressed) {
+                return MACRO(D(LCTL),T(TAB),U(LCTL),END);
+            }
+            break;
+        case FRIGHT:
+	        if (record->event.pressed) {
+                return MACRO(D(LCTL),D(LSFT),T(TAB),U(LCTL),U(LSFT),END);
+            }
+            break;
+
+        // IntelliJ
 	    case CLEAN:
 	        if (record->event.pressed) {
 	    	    return MACRO(D(LGUI),D(LSFT),T(C),U(LGUI),U(LSFT),END);
@@ -144,26 +171,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	    	    return MACRO(D(LCTL),D(LALT),T(O),U(LALT),U(LCTL),END);
 	        }
 	        break;
-	    case UNDS:
-	        if (record->event.pressed) {
-	    	    return MACRO(D(LSFT),T(MINS),U(LSFT),END);
-	        }
-	        break;
-	    case DQT:
-	        if (record->event.pressed) {
-	    	    return MACRO(D(LSFT),T(QUOT),U(LSFT),END);
-	        }
-	        break;
-        case FRIGHT:
-	        if (record->event.pressed) {
-                return MACRO(D(LCTL),D(LSFT),T(TAB),U(LCTL),U(LSFT),END);
-            }
-            break;
-        case FLEFT:
-	        if (record->event.pressed) {
-                return MACRO(D(LCTL),T(TAB),U(LCTL),END);
-            }
-            break;
     }
     return MACRO_NONE;
 };

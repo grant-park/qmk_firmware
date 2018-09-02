@@ -16,7 +16,7 @@ enum planck_keycodes {
     MOUSE,
     ARROWS,
     MIDDLE,
-    GOOI,
+    DESKTOP_SWITCH,
 
     // Symbols
     UNDS,
@@ -44,10 +44,10 @@ enum planck_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [PRIMARY] = {
-        {KC_Q,      KC_W,          KC_E,           KC_R,         KC_T,            XXXXXXX, XXXXXXX, KC_Y,            KC_U,         KC_I,           KC_O,    KC_P},
-        {KC_A,      L(MOUSE,KC_S), L(MIDDLE,KC_D), GUI(KC_F),    CTL(KC_G),       XXXXXXX, XXXXXXX, CTL(KC_H),       GUI(KC_J),    L(MIDDLE,KC_K), KC_L,    L(ARROWS,KC_SCLN)},
-        {M(UNDS),   KC_X,          KC_C,           L(GOOI,KC_V), ALT(KC_B),       XXXXXXX, XXXXXXX, ALT(KC_N),       L(GOOI,KC_M), KC_COMM,        KC_DOT,  SFT(KC_BSLS)},
-        {XXXXXXX,   XXXXXXX,       XXXXXXX,        XXXXXXX,      L(LOWER,KC_ENT), XXXXXXX, XXXXXXX, L(RAISE,KC_SPC), XXXXXXX,      XXXXXXX,        XXXXXXX, XXXXXXX}
+        {KC_Q,      KC_W,          KC_E,           KC_R,                   KC_T,            XXXXXXX, XXXXXXX, KC_Y,            KC_U,                   KC_I,           KC_O,    KC_P},
+        {KC_A,      L(MOUSE,KC_S), L(MIDDLE,KC_D), GUI(KC_F),              CTL(KC_G),       XXXXXXX, XXXXXXX, CTL(KC_H),       GUI(KC_J),              L(MIDDLE,KC_K), KC_L,    L(ARROWS,KC_SCLN)},
+        {M(UNDS),   KC_X,          KC_C,           L(DESKTOP_SWITCH,KC_V), ALT(KC_B),       XXXXXXX, XXXXXXX, ALT(KC_N),       L(DESKTOP_SWITCH,KC_M), KC_COMM,        KC_DOT,  SFT(KC_BSLS)},
+        {XXXXXXX,   XXXXXXX,       XXXXXXX,        XXXXXXX,                L(LOWER,KC_ENT), XXXXXXX, XXXXXXX, L(RAISE,KC_SPC), XXXXXXX,                XXXXXXX,        XXXXXXX, XXXXXXX}
     }, 
     [LOWER] = {
         {LSFT(KC_Q), LSFT(KC_W), LSFT(KC_E), LSFT(KC_R), LSFT(KC_T), XXXXXXX, XXXXXXX, LSFT(KC_Y), LSFT(KC_U), LSFT(KC_I),    LSFT(KC_O),   LSFT(KC_P)},
@@ -79,7 +79,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         {M(VSEARCH_REPLACE), _______, _______,        _______,         _______,     XXXXXXX, XXXXXXX, _______,             _______, _______, _______,  _______},
         {XXXXXXX,            XXXXXXX, XXXXXXX,        XXXXXXX,         _______,     XXXXXXX, XXXXXXX, _______,             XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX}
     },
-    [GOOI] = {
+    [DESKTOP_SWITCH] = {
         {LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5),  XXXXXXX, XXXXXXX, LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0)},
         {_______,    _______,    _______,    _______,    _______,     XXXXXXX, XXXXXXX, _______,    _______,    _______,    _______,    _______},
         {_______,    _______,    _______,    _______,    _______,     XXXXXXX, XXXXXXX, _______,    _______,    _______,    _______,    _______},

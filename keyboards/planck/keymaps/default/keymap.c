@@ -9,7 +9,7 @@
 #define L(X,Y) LT(M(X), Y)
 
 enum planck_keycodes {
-    // LAYERS
+    // Layers
     PRIMARY,
     RAISE,
     LOWER,
@@ -18,16 +18,22 @@ enum planck_keycodes {
     MIDDLE,
     GOOI,
 
-    // MACROS
+    // Symbols
     UNDS,
     DQT,
+
+    // Vim
     VUP,
     VDOWN,
     VLEFT,
     VRIGHT,
     VSEARCH_REPLACE,
+
+    // Firefox
     FLEFT,
     FRIGHT,
+
+    // IntelliJ
     CLEAN,
     SYNC,
     SEARCH_PROJ,

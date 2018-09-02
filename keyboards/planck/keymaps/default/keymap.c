@@ -19,11 +19,6 @@ enum planck_keycodes {
     GOOI,
 
     // MACROS
-    LBRC, // unused atm
-    RBRC, // unused atm
-    LPRN, // unused atm
-    RPRN, // unused atm
-    SPOTLIGHT, // unused atm
     UNDS,
     DQT,
     VUP,
@@ -163,31 +158,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 return MACRO(D(LCTL),T(TAB),U(LCTL),END);
             }
             break;
-        case SPOTLIGHT: // unused atm
-	        if (record->event.pressed) {
-                return MACRO( D(RGUI), T(SPC), U(RGUI), END);
-            }
-            break;
-	    case LBRC: // unused atm
-	        if (record->event.pressed) {
-	    	    return MACRO(D(LSFT),T(LBRC),U(LSFT),END);
-	        }
-	        break;
-	    case RBRC: // unused atm
-	        if (record->event.pressed) {
-	    	    return MACRO(D(LSFT),T(RBRC),U(LSFT),END);
-	        }
-	        break;
-	    case LPRN: // unused atm
-	        if (record->event.pressed) {
-	    	    return MACRO(D(LSFT),T(9),U(LSFT),END);
-	        }
-	        break;
-	    case RPRN: // unused atm
-	        if (record->event.pressed) {
-	    	    return MACRO(D(LSFT),T(0),U(LSFT),END);
-	        }
-	        break;
     }
     return MACRO_NONE;
 };

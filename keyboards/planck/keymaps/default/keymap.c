@@ -1,5 +1,4 @@
 #include "planck.h"
-#include "mousekey.h"
 #define _______ KC_TRNS
 #define XXXXXXX KC_TRNS
 #define USEDKEY KC_TRNS
@@ -9,15 +8,41 @@
 #define CTL(X) MT(MOD_LCTL, X)
 #define L(X,Y) LT(M(X), Y)
 
-/** todo individual tapping terms for individual keys and macros, e.g. tapping term for shift can drastically decrease in comparison to other keys **/
+enum planck_keycodes {
+    // LAYERS
+    PRIMARY,
+    RAISE,
+    LOWER,
+    MOUSE,
+    ARROWS,
+
+    // MACROS
+    UNDS,
+    DQT,
+    LBRC,
+    RBRC,
+    LPRN,
+    RPRN,
+    VLEFT,
+    VRIGHT,
+    VSEARCH_REPLACE,
+    FLEFT,
+    FRIGHT,
+    CLEAN,
+    SYNC,
+    SEARCH_PROJ,
+    SEARCH_CLASS,
+    REFORMAT,
+    OPTIMIZE_IMPORTS
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [0] = {
+    [PRIMARY] = {
         {KC_Q,      KC_W,      KC_E,       KC_R,       KC_T,        XXXXXXX, XXXXXXX, KC_Y,        KC_U,      KC_I,      KC_O,    KC_P    },
         {KC_A,      L(3,KC_S), L(1,KC_D),  GUI(KC_F),  CTL(KC_G),   XXXXXXX, XXXXXXX, CTL(KC_H),   GUI(KC_J), L(1,KC_K), KC_L,    L(7,KC_SCLN) },
         {M(15),     KC_X,      KC_C,       L(9,KC_V),  ALT(KC_B),   XXXXXXX, XXXXXXX, ALT(KC_N),   L(9,KC_M), KC_COMM,   KC_DOT,  SFT(KC_BSLS) },
         {XXXXXXX,   XXXXXXX,   XXXXXXX,    XXXXXXX,    L(8,KC_ENT), XXXXXXX, XXXXXXX, L(2,KC_SPC), XXXXXXX,   XXXXXXX,   XXXXXXX, XXXXXXX }
     }, 
-    
 
     [1] = {
         {KC_GRV,  KC_F1,   KC_F2,   KC_F3,   _______, XXXXXXX, XXXXXXX, _______, _______, _______, _______, M(16)},
@@ -189,11 +214,13 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	        }
 	        break;
         case 21:
+            // vim left 9
 	        if (record->event.pressed) {
             return MACRO( T(9), T(H), END);
             }
             break;
         case 22:
+            // vim right 9
 	        if (record->event.pressed) {
             return MACRO( T(9), T(L), END);
             }

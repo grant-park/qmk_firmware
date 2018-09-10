@@ -43,7 +43,17 @@ enum planck_keycodes {
     FIND_REPLACE,
     SEARCH_CLASS,
     REFORMAT,
-    OPTIMIZE_IMPORTS
+    OPTIMIZE_IMPORTS,
+
+    // ChunkWM
+    CHUNK_INC_L,
+    CHUNK_INC_D,
+    CHUNK_INC_U,
+    CHUNK_INC_R,
+    CHUNK_DEC_L,
+    CHUNK_DEC_D,
+    CHUNK_DEC_U,
+    CHUNK_DEC_R,
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -84,10 +94,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         {XXXXXXX,            XXXXXXX,       XXXXXXX,          XXXXXXX,         _______,     XXXXXXX, XXXXXXX, _______,             XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX}
     },
     [DESKTOP] = {
-        {LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5),  XXXXXXX, XXXXXXX, LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0)},
-        {KC_VOLD,    KC_VOLU,    KC_MUTE,    _______,    _______,     XXXXXXX, XXXXXXX, _______,    _______,    _______,    _______,    _______},
-        {KC_SLCK,    KC_PAUS,    _______,    _______,    _______,     XXXXXXX, XXXXXXX, _______,    _______,    _______,    _______,    _______},
-        {XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,     XXXXXXX, XXXXXXX, _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX}
+        {LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5),  XXXXXXX, XXXXXXX, LGUI(KC_6),     LGUI(KC_7),     LGUI(KC_8),     LGUI(KC_9),     LGUI(KC_0)},
+        {KC_VOLD,    KC_VOLU,    KC_MUTE,    KC_MPRV,    KC_MNXT,     XXXXXXX, XXXXXXX, M(CHUNK_INC_L), M(CHUNK_INC_D), M(CHUNK_INC_U), M(CHUNK_INC_R), _______},
+        {KC_SLCK,    KC_PAUS,    KC_MPLY,    _______,    _______,     XXXXXXX, XXXXXXX, M(CHUNK_DEC_L), M(CHUNK_DEC_D), M(CHUNK_DEC_U), M(CHUNK_DEC_R), _______},
+        {XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,     XXXXXXX, XXXXXXX, _______,        XXXXXXX,        XXXXXXX,        XXXXXXX,        XXXXXXX}
     }
 };
 
@@ -196,6 +206,48 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	    case OPTIMIZE_IMPORTS:
 	        if (record->event.pressed) {
 	    	    return MACRO(D(LCTL),D(LALT),T(O),U(LALT),U(LCTL),END);
+	        }
+	        break;
+
+        // ChunkWM
+	    case CHUNK_DEC_L:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(A),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_DEC_D:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(S),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_DEC_U:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(W),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_DEC_R:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(D),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_INC_L:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LALT),D(LSFT),T(A),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_INC_D:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LALT),D(LSFT),T(S),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_INC_U:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LALT),D(LSFT),T(W),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_INC_R:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LALT),D(LSFT),T(D),U(LALT),U(LSFT),END);
 	        }
 	        break;
     }

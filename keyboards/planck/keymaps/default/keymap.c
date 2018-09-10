@@ -16,7 +16,7 @@ enum planck_keycodes {
     MOUSE,
     ARROWS,
     MIDDLE,
-    DESKTOP_SWITCH,
+    DESKTOP,
 
     // Symbols
     UNDS,
@@ -40,6 +40,7 @@ enum planck_keycodes {
     CLEAN,
     SYNC,
     SEARCH_PROJ,
+    FIND_REPLACE,
     SEARCH_CLASS,
     REFORMAT,
     OPTIMIZE_IMPORTS
@@ -49,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [PRIMARY] = {
         {KC_Q,      KC_W,          KC_E,           KC_R,                   KC_T,            XXXXXXX, XXXXXXX, KC_Y,            KC_U,                   KC_I,           KC_O,    KC_P},
         {KC_A,      L(MOUSE,KC_S), L(MIDDLE,KC_D), GUI(KC_F),              CTL(KC_G),       XXXXXXX, XXXXXXX, CTL(KC_H),       GUI(KC_J),              L(MIDDLE,KC_K), KC_L,    L(ARROWS,KC_SCLN)},
-        {M(UNDS),   KC_X,          KC_C,           L(DESKTOP_SWITCH,KC_V), ALT(KC_B),       XXXXXXX, XXXXXXX, ALT(KC_N),       L(DESKTOP_SWITCH,KC_M), KC_COMM,        KC_DOT,  SFT(KC_BSLS)},
+        {M(UNDS),   KC_X,          KC_C,           L(DESKTOP,KC_V),        ALT(KC_B),       XXXXXXX, XXXXXXX, ALT(KC_N),       L(DESKTOP,KC_M),        KC_COMM,        KC_DOT,  SFT(KC_BSLS)},
         {XXXXXXX,   XXXXXXX,       XXXXXXX,        XXXXXXX,                L(LOWER,KC_ENT), XXXXXXX, XXXXXXX, L(RAISE,KC_SPC), XXXXXXX,                XXXXXXX,        XXXXXXX, XXXXXXX}
     }, 
     [LOWER] = {
@@ -77,15 +78,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX}
     },
     [ARROWS] = {
-        {M(VQUIT),           M(VSAVE),      _______,        _______,         _______,     XXXXXXX, XXXXXXX, _______,             _______, KC_UP,   _______,  _______},
-        {M(CLEAN),           M(SYNC),       M(SEARCH_PROJ), M(SEARCH_CLASS), M(REFORMAT), XXXXXXX, XXXXXXX, M(OPTIMIZE_IMPORTS), KC_LEFT, KC_DOWN, KC_RIGHT, USEDKEY}, 
-        {M(VSEARCH_REPLACE), M(VQUIT_SAVE), _______,        _______,         _______,     XXXXXXX, XXXXXXX, _______,             _______, _______, _______,  _______},
-        {XXXXXXX,            XXXXXXX,       XXXXXXX,        XXXXXXX,         _______,     XXXXXXX, XXXXXXX, _______,             XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX}
+        {M(VQUIT),           M(VSAVE),      _______,          _______,         _______,     XXXXXXX, XXXXXXX, _______,             _______, KC_UP,   _______,  _______},
+        {M(CLEAN),           M(SYNC),       M(SEARCH_PROJ),   M(SEARCH_CLASS), M(REFORMAT), XXXXXXX, XXXXXXX, M(OPTIMIZE_IMPORTS), KC_LEFT, KC_DOWN, KC_RIGHT, USEDKEY}, 
+        {M(VSEARCH_REPLACE), M(VQUIT_SAVE), M(FIND_REPLACE),  _______,         _______,     XXXXXXX, XXXXXXX, _______,             _______, _______, _______,  _______},
+        {XXXXXXX,            XXXXXXX,       XXXXXXX,          XXXXXXX,         _______,     XXXXXXX, XXXXXXX, _______,             XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX}
     },
-    [DESKTOP_SWITCH] = {
+    [DESKTOP] = {
         {LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5),  XXXXXXX, XXXXXXX, LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0)},
-        {_______,    _______,    _______,    _______,    _______,     XXXXXXX, XXXXXXX, _______,    _______,    _______,    _______,    _______},
-        {_______,    _______,    _______,    _______,    _______,     XXXXXXX, XXXXXXX, _______,    _______,    _______,    _______,    _______},
+        {KC_VOLD,    KC_VOLU,    KC_MUTE,    _______,    _______,     XXXXXXX, XXXXXXX, _______,    _______,    _______,    _______,    _______},
+        {KC_SLCK,    KC_PAUS,    _______,    _______,    _______,     XXXXXXX, XXXXXXX, _______,    _______,    _______,    _______,    _______},
         {XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX,    _______,     XXXXXXX, XXXXXXX, _______,    XXXXXXX,    XXXXXXX,    XXXXXXX,    XXXXXXX}
     }
 };
@@ -175,6 +176,11 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	    case SEARCH_PROJ:
 	        if (record->event.pressed) {
 	    	    return MACRO(D(LGUI),D(LSFT),T(F),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case FIND_REPLACE:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(R),U(LGUI),U(LSFT),END);
 	        }
 	        break;
 	    case SEARCH_CLASS:

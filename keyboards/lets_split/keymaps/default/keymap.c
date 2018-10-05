@@ -81,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [MOUSE] = LAYOUT_ortho_4x4(
         RESET,   KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R,                   _______, _______,    KC_MS_UP,   _______,     _______, \
         KC_ACL0, KC_ACL1, KC_BTN1, KC_BTN2, KC_BTN3,                   _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______, \
-        KC_VOLD, _______, _______, _______, _______, _______, _______, _______, _______,    _______,    _______,     _______
+        _______, _______, _______, _______, _______, _______, _______, _______, _______,    _______,    _______,     _______
     ),
     [ARROWS] = LAYOUT_ortho_4x4(
         M(VQUIT),           M(VSAVE),      _______,          _______,         _______,                       _______,             _______, KC_UP,   _______,  _______, \

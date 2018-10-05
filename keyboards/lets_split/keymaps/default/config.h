@@ -26,7 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MOUSEKEY_INTERVAL       20
 #define MOUSEKEY_DELAY          0
 #define MOUSEKEY_TIME_TO_MAX    10
-#define MOUSEKEY_MAX_SPEED      5
+#define MOUSE:uuuKEY_MAX_SPEED      5
 #define MOUSEKEY_WHEEL_MAX_SPEED 1
 #define MOUSEKEY_WHEEL_DELAY 100
 #define MOUSEKEY_WHEEL_TIME_TO_MAX 5
@@ -38,13 +38,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 /* Use I2C or Serial, not both */
 
-#define USE_SERIAL
-// #define USE_I2C
+//#define USE_SERIAL
+#define USE_I2C
 
 /* Select hand configuration */
 
-//#define MASTER_LEFT
 // #define MASTER_RIGHT
-#define EE_HANDS
+//#define EE_HANDS
 
 #endif

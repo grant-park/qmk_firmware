@@ -44,6 +44,8 @@ enum planck_keycodes {
     SEARCH_CLASS,
     REFORMAT,
     OPTIMIZE_IMPORTS,
+    EXPAND,
+    COLLAPSE,
 
     // ChunkWM
     CHUNK_INC_L,
@@ -83,12 +85,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     },
     [MOUSE] = {
         {RESET,   KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, XXXXXXX, XXXXXXX, _______, _______,    KC_MS_UP,   _______,     _______},
-        {KC_ACL0, KC_ACL1, KC_BTN1, KC_BTN2, KC_BTN3, XXXXXXX, XXXXXXX, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______},
-        {KC_VOLD, _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______,    _______,    _______,     _______},
+        {KC_ACL0, _______, KC_BTN1, KC_BTN2, KC_BTN3, XXXXXXX, XXXXXXX, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______},
+        {_______, _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______,    _______,    _______,     _______},
         {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, _______, XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX}
     },
     [ARROWS] = {
-        {M(VQUIT),           M(VSAVE),      _______,          _______,         _______,     XXXXXXX, XXXXXXX, _______,             _______, KC_UP,   _______,  _______},
+        {M(VQUIT),           M(VSAVE),      M(COLLAPSE),      M(EXPAND),       _______,     XXXXXXX, XXXXXXX, _______,             _______, KC_UP,   _______,  _______},
         {M(CLEAN),           M(SYNC),       M(SEARCH_PROJ),   M(SEARCH_CLASS), M(REFORMAT), XXXXXXX, XXXXXXX, M(OPTIMIZE_IMPORTS), KC_LEFT, KC_DOWN, KC_RIGHT, USEDKEY}, 
         {M(VSEARCH_REPLACE), M(VQUIT_SAVE), M(FIND_REPLACE),  _______,         _______,     XXXXXXX, XXXXXXX, _______,             _______, _______, _______,  _______},
         {XXXXXXX,            XXXXXXX,       XXXXXXX,          XXXXXXX,         _______,     XXXXXXX, XXXXXXX, _______,             XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX}
@@ -206,6 +208,16 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	    case OPTIMIZE_IMPORTS:
 	        if (record->event.pressed) {
 	    	    return MACRO(D(LCTL),D(LALT),T(O),U(LALT),U(LCTL),END);
+	        }
+	        break;
+	    case EXPAND:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(PLUS),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case COLLAPSE:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(MINS),U(LGUI),U(LSFT),END);
 	        }
 	        break;
 

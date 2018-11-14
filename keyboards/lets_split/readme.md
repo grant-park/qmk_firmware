@@ -40,6 +40,7 @@ For more information on customizing keymaps, take a look at the primary document
 ### Let's split 1.0
 If you have a first generation Let's Split you will need to use the revision 1 code. To do so, use `rev1` in all your commands instead.
 
+
 Features
 --------
 

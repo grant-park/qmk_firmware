@@ -45,6 +45,10 @@ enum layer_and_key_codes {
     SEARCH_CLASS,
     REFORMAT,
     OPTIMIZE_IMPORTS,
+    STEP_OVER,
+    STEP_INTO,
+    STEP_OUT,
+    RESUME,
 
     // ChunkWM
     CHUNK_INC_L,
@@ -84,9 +88,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______,    _______,    _______,     _______
     ),
     [ARROWS] = LAYOUT_ortho_4x4(
-        M(VQUIT),           M(VSAVE),      _______,          _______,         _______,                       _______,             _______, KC_UP,   _______,  _______, \
-        M(CLEAN),           M(SYNC),       M(SEARCH_PROJ),   M(SEARCH_CLASS), M(REFORMAT),                   M(OPTIMIZE_IMPORTS), KC_LEFT, KC_DOWN, KC_RIGHT, USEDKEY, \
-        _______,            M(VQUIT_SAVE), M(FIND_REPLACE),  _______,         _______,     _______, _______, _______,             _______, _______, _______,  _______
+        M(VQUIT),           M(VSAVE),      _______,          _______,         _______,                       _______,             _______,   KC_UP,        _______,       _______, \
+        M(CLEAN),           M(SYNC),       M(SEARCH_PROJ),   M(SEARCH_CLASS), M(REFORMAT),                   M(OPTIMIZE_IMPORTS), KC_LEFT,   KC_DOWN,      KC_RIGHT,      USEDKEY, \
+        _______,            M(VQUIT_SAVE), M(FIND_REPLACE),  _______,         _______,     _______, _______, _______,             M(RESUME), M(STEP_OVER), M(STEP_INTO),  M(STEP_OUT)
     ),
     [DESKTOP] = LAYOUT_ortho_4x4(
         LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5),                    LGUI(KC_6),     LGUI(KC_7),     LGUI(KC_8),     LGUI(KC_9),     LGUI(KC_0), \
@@ -195,6 +199,26 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 	    case OPTIMIZE_IMPORTS:
 	        if (record->event.pressed) {
 	    	    return MACRO(D(LCTL),D(LALT),T(O),U(LALT),U(LCTL),END);
+	        }
+	        break;
+	    case STEP_OVER:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),D(LALT),T(T),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case STEP_INTO:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),D(LALT),T(E),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case STEP_OUT:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),D(LALT),T(Q),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case RESUME:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),D(LALT),T(R),U(LALT),U(LSFT),END);
 	        }
 	        break;
 

@@ -113,6 +113,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 if (timer_elapsed(key_timer) > LONGPRESS_DELAY) {
                     unregister_code(KC_LSFT);
                 } else {
+                    unregister_code(KC_LSFT);
 	    	        return MACRO(D(LSFT),T(MINS),U(LSFT),END);
                 }
             }
@@ -163,12 +164,14 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
         // Firefox
         case FLEFT:
 	        if (record->event.pressed) {
-                return MACRO(D(LCTL),D(LSFT),T(TAB),U(LCTL),U(LSFT),END);
+                //return MACRO(D(LCTL),D(LSFT),T(TAB),U(LCTL),U(LSFT),END);
+                return MACRO(D(LGUI),D(LSFT),T(LBRC),U(LGUI),U(LSFT),END);
             }
             break;
         case FRIGHT:
 	        if (record->event.pressed) {
-                return MACRO(D(LCTL),T(TAB),U(LCTL),END);
+                //return MACRO(D(LCTL),T(TAB),U(LCTL),END);
+                return MACRO(D(LGUI),D(LSFT),T(RBRC),U(LGUI),U(LSFT),END);
             }
             break;
 

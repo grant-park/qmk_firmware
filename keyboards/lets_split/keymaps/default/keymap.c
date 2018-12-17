@@ -20,8 +20,7 @@ enum layer_and_key_codes {
     ARROWS,
     MIDDLE,
     DESKTOP,
-    LOL_PRIMARY,
-    LOL_SECONDARY,
+    LOL,
 
     // Symbols
     UNDS,
@@ -93,9 +92,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_PIPE, KC_F7,   KC_F8,   KC_F9,    _______, _______, _______, _______,  M(FLEFT), M(FRIGHT), _______,   KC_SLSH
     ),
     [MOUSE] = LAYOUT_ortho_4x4(
-        RESET,   KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R,                           _______, _______,    KC_MS_UP,   _______,     _______, \
-        KC_ACL0, KC_ACL1, KC_BTN1, KC_BTN2, KC_BTN3,                           _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______, \
-        _______, _______, _______, _______, _______, TG(LOL_PRIMARY), _______, _______, _______,    _______,    _______,     _______
+        RESET,   KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R,                   _______, _______,    KC_MS_UP,   _______,     _______, \
+        KC_ACL0, KC_ACL1, KC_BTN1, KC_BTN2, KC_BTN3,                   _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______, \
+        _______, _______, _______, _______, _______, TG(LOL), _______, _______, _______,    _______,    _______,     _______
     ),
     [ARROWS] = LAYOUT_ortho_4x4(
         M(VQUIT),           M(VSAVE),      _______,          _______,         _______,                       _______,             _______,   KC_UP,        _______,       _______, \
@@ -107,15 +106,28 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_VOLD,    KC_VOLU,    KC_MUTE,    KC_MPRV,    KC_MNXT,                       M(CHUNK_INC_L), M(CHUNK_INC_D), M(CHUNK_INC_U), M(CHUNK_INC_R), _______, \
         KC_SLCK,    KC_PAUS,    KC_MPLY,    _______,    _______,     _______, _______, M(CHUNK_DEC_L), M(CHUNK_DEC_D), M(CHUNK_DEC_U), M(CHUNK_DEC_R), _______
     ),
-    [LOL_PRIMARY] = LAYOUT_ortho_4x4(
+    [LOL] = LAYOUT_ortho_4x4(
         KC_1,     KC_2,     KC_3,     KC_4,     KC_5,                                _______, _______, _______, _______, _______, \
         M(LOL_Q), M(LOL_W), M(LOL_E), M(LOL_R), KC_TAB,                              _______, _______, _______, _______, _______, \
-        KC_G,     KC_V,     KC_D,     KC_F,     KC_ESC, M(LOL_SPC), TG(LOL_PRIMARY), _______, _______, _______, _______, _______ 
+        KC_G,     KC_V,     KC_D,     KC_F,     KC_ESC, M(LOL_SPC), TG(LOL), _______, _______, _______, _______, _______ 
     )
 };
 
 static uint16_t key_timer;
 static bool lol_space_held = false;
+
+macro_t *press_lol_key(keyrecord_t *record, uint8_t id, const macro_t *lol_macro) {
+	if (record->event.pressed) {
+        if (lol_space_held) {
+	        return (macro_t *) lol_macro;
+        } else {
+            register_code(id);
+        }
+    } else {
+        unregister_code(id);
+    }
+    return MACRO_NONE;
+}
 
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
     switch(id) {
@@ -295,53 +307,21 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
                 lol_space_held = true;
                 register_code(KC_SPC);
             } else {
-                lol_space_held = false;
                 unregister_code(KC_SPC);
+                lol_space_held = false;
             }
 	        break;
         case LOL_Q:
-	        if (record->event.pressed) {
-                if (lol_space_held) {
-	    	        return MACRO(D(LCTL),T(Q),U(LCTL),END);
-                } else {
-                    register_code(KC_Q);
-                }
-            } else {
-                unregister_code(KC_Q);
-            }
+            return press_lol_key(record, KC_Q, MACRO(D(LCTL),T(Q),U(LCTL),END));
             break;
         case LOL_W:
-	        if (record->event.pressed) {
-                if (lol_space_held) {
-	    	        return MACRO(D(LCTL),T(W),U(LCTL),END);
-                } else {
-                    register_code(KC_W);
-                }
-            } else {
-                unregister_code(KC_W);
-            }
+            return press_lol_key(record, KC_W, MACRO(D(LCTL),T(W),U(LCTL),END));
             break;
         case LOL_E:
-	        if (record->event.pressed) {
-                if (lol_space_held) {
-	    	        return MACRO(D(LCTL),T(E),U(LCTL),END);
-                } else {
-                    register_code(KC_E);
-                }
-            } else {
-                unregister_code(KC_E);
-            }
+            return press_lol_key(record, KC_E, MACRO(D(LCTL),T(E),U(LCTL),END));
             break;
         case LOL_R:
-	        if (record->event.pressed) {
-                if (lol_space_held) {
-	    	        return MACRO(D(LCTL),T(R),U(LCTL),END);
-                } else {
-                    register_code(KC_R);
-                }
-            } else {
-                unregister_code(KC_R);
-            }
+            return press_lol_key(record, KC_R, MACRO(D(LCTL),T(R),U(LCTL),END));
             break;
     }
     return MACRO_NONE;

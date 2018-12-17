@@ -9,6 +9,7 @@ extern keymap_config_t keymap_config;
 #define SFT(X) MT(MOD_LSFT, X)
 #define CTL(X) MT(MOD_LCTL, X)
 #define L(X,Y) LT(M(X), Y)
+#define LONGPRESS_DELAY 150
 
 enum layer_and_key_codes {
     // Layers
@@ -99,15 +100,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
+static uint16_t key_timer;
+
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
     switch(id) {
         // Symbols
 	    case UNDS:
 	        if (record->event.pressed) {
+                key_timer = timer_read();
                 register_code(KC_LSFT);
             } else {
-                unregister_code(KC_LSFT);
-	    	    return MACRO(D(LSFT),T(MINS),U(LSFT),END);
+                if (timer_elapsed(key_timer) > LONGPRESS_DELAY) {
+                    unregister_code(KC_LSFT);
+                } else {
+	    	        return MACRO(D(LSFT),T(MINS),U(LSFT),END);
+                }
             }
 	        break;
 	    case DQT:

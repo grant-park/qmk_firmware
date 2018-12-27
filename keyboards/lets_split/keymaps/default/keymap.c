@@ -102,7 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [LOL] = LAYOUT_ortho_4x4(
         KC_1, KC_2, KC_3, KC_4, KC_P,                         _______, _______, _______, _______, _______, \
         KC_Q, KC_W, KC_E, KC_R, KC_TAB,                       _______, _______, _______, _______, _______, \
-        KC_G, KC_V, KC_D, KC_F, CTL(KC_ESC), KC_SPC, TG(LOL), _______, _______, _______, _______, _______ 
+        KC_G, KC_B, KC_D, KC_F, CTL(KC_ESC), KC_SPC, TG(LOL), _______, _______, _______, _______, _______ 
     )
 };
 

@@ -146,7 +146,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   RGB_TOG, LGUI(KC_1), LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4),    LGUI(KC_5),     LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9),    LGUI(KC_0), TG(MO(_GAME)),\
   KC_DQT,  KC_Q,       KC_W,        KC_E,        KC_R,          KC_T,           KC_F1,      KC_F2,      KC_F3,      KC_Y,          KC_U,       KC_I,        KC_O,         KC_P,            KC_QUOT, \
   KC_LPRN, KC_A,       mouse(KC_S), lower(KC_D), lgui(KC_F),    lctl(KC_G),     KC_F4,      KC_5,       KC_6,       lctl(KC_H),    lgui(KC_J), lower(KC_K), codify(KC_L), arrows(KC_SCLN), KC_RPRN, \
-  KC_LCBR, KC_Z,       KC_X,        KC_C,        KC_V,          lalt(KC_B),     KC_F7,      KC_F8,      KC_F9,      lalt(KC_N),    KC_M,       KC_COMM,     KC_DOT,       lsft(KC_BSLS),   KC_RCBR, \
+  KC_LCBR, M(UNDS),    KC_X,        KC_C,        KC_V,          lalt(KC_B),     KC_F7,      KC_F8,      KC_F9,      lalt(KC_N),    KC_M,       KC_COMM,     KC_DOT,       lsft(KC_BSLS),   KC_RCBR, \
   KC_LBRC, KC_LBRC,    KC_LALT,     M(PLUS),     lower(KC_EQL), shifty(KC_ENT), KC_VOLD,    KC_MUTE,    KC_VOLU,    raise(KC_SPC), M(UNDS),    KC_MINS,     KC_SLSH,      KC_RBRC,         KC_RBRC \
 ),
 [_GAME] = LAYOUT( 
@@ -158,8 +158,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 [_LOWER] = LAYOUT( 
   _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,    _______,     _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,    M(WORKUP),   M(WORKDOWN),  _______,     _______,    _______,\
-  KC_TILD, _______, _______, _______, _______, _______, _______, _______, _______,  M(VIMLEFT), M(VIMDOWN),  M(VIMUP),     M(VIMRIGHT), _______,    _______, \
+  _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,    M(WORKUP),   M(WORKDOWN),  _______,     KC_DQT,     _______,\
+  KC_TILD, _______, _______, _______, _______, _______, _______, _______, _______,  M(VIMLEFT), M(VIMDOWN),  M(VIMUP),     M(VIMRIGHT), KC_QUOT,    _______, \
   KC_PIPE, _______, _______, _______, _______, _______, _______, _______, _______,  _______,    M(FOX_LEFT), M(FOX_RIGHT), _______,     _______,    _______,\
   _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,    _______,     _______,      _______,     _______,    _______\
 ),
@@ -167,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, _______,  _______, _______, _______,       _______, _______, _______, _______, _______, _______, _______, \
   _______, KC_1,    KC_2,     KC_3,    KC_4,          KC_5,    _______, _______, _______, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    _______, \
   _______, KC_EXLM, KC_AT,    KC_HASH, KC_DLR,        KC_PERC, _______, _______, _______, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, _______, \
-  _______, KC_QUOT, KC_TAB,   KC_TILD, KC_SLSH,       KC_PIPE, _______, _______, _______, KC_GRV,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______, \
+  _______, KC_QUOT, KC_TAB,   KC_TILD, KC_SLSH,       KC_Z,    _______, _______, _______, KC_GRV,  KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, _______, \
   _______, _______, _______,  _______, RCTL(KC_SLSH), KC_ESC,  _______, _______, _______, _______, _______, _______, _______, _______, _______  \
 ),
 [_MOUSECURSOR] = LAYOUT( 
@@ -369,6 +369,19 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
         if (record->event.pressed){
           return MACRO (I(1), T(H),T(E),T(L), T(L), T(O), T(SPACE), T(W), T(O), T(R), T(L), T(D),  END);
         }  
+	case UNDS:
+	  if (record->event.pressed) {
+          key_timer = timer_read();
+          register_code(KC_LSFT);
+      } else {
+          if (timer_elapsed(key_timer) > LONGPRESS_DELAY) {
+              unregister_code(KC_LSFT);
+          } else {
+              unregister_code(KC_LSFT);
+	          return MACRO(D(LSFT),T(MINS),U(LSFT),END);
+          }
+      }
+	  break;
     case KC_CLEAN:
       if (record->event.pressed) {
           return MACRO(D(LGUI),D(LSFT),T(C),U(LGUI),U(LSFT),END);

@@ -17,6 +17,7 @@ extern keymap_config_t keymap_config;
 //Following line allows macro to read current RGB settings
 extern rgblight_config_t rgblight_config;
 
+#define LONGPRESS_DELAY 150
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
@@ -145,22 +146,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT( 
   RGB_TOG, LGUI(KC_1), LGUI(KC_2),  LGUI(KC_3),  LGUI(KC_4),    LGUI(KC_5),     LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9),    LGUI(KC_0), TG(MO(_GAME)),\
   KC_DQT,  KC_Q,       KC_W,        KC_E,        KC_R,          KC_T,           KC_F1,      KC_F2,      KC_F3,      KC_Y,          KC_U,       KC_I,        KC_O,         KC_P,            KC_QUOT, \
-  KC_LPRN, KC_A,       mouse(KC_S), lower(KC_D), lgui(KC_F),    lctl(KC_G),     KC_F4,      KC_5,       KC_6,       lctl(KC_H),    lgui(KC_J), lower(KC_K), codify(KC_L), arrows(KC_SCLN), KC_RPRN, \
+  KC_LPRN, KC_A,       mouse(KC_S), lower(KC_D), lgui(KC_F),    lctl(KC_G),     KC_F4,      KC_F5,      KC_F6,      lctl(KC_H),    lgui(KC_J), lower(KC_K), codify(KC_L), arrows(KC_SCLN), KC_RPRN, \
   KC_LCBR, M(UNDS),    KC_X,        KC_C,        KC_V,          lalt(KC_B),     KC_F7,      KC_F8,      KC_F9,      lalt(KC_N),    KC_M,       KC_COMM,     KC_DOT,       lsft(KC_BSLS),   KC_RCBR, \
   KC_LBRC, KC_LBRC,    KC_LALT,     M(PLUS),     lower(KC_EQL), shifty(KC_ENT), KC_VOLD,    KC_MUTE,    KC_VOLU,    raise(KC_SPC), M(UNDS),    KC_MINS,     KC_SLSH,      KC_RBRC,         KC_RBRC \
 ),
 [_GAME] = LAYOUT( 
-  KC_1, KC_2, KC_3, KC_4, KC_5,   KC_6,   KC_7,    KC_8,    KC_9,    KC_0,   RGB_TOG, RGB_TOG, \
-  KC_Y, KC_Q, KC_W, KC_E, KC_R,   KC_T,   RGB_TOG, RGB_MOD, _______, KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_QUOT, \
-  KC_H, KC_A, KC_S, KC_D, KC_F,   KC_G,   KC_MPRV, KC_MPLY, KC_MNXT, KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_RPRN, \
-  KC_N, KC_Z, KC_X, KC_C, KC_V,   KC_B,   KC_E,    KC_R,    _______, KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_BSLS, KC_RCBR, \
-  KC_U, KC_J, KC_M, KC_V, KC_EQL, KC_ENT, KC_VOLD, KC_MUTE, KC_VOLU, KC_SPC, M(UNDS), KC_MINS, KC_SLSH, KC_RBRC, TG(MO(_GAME)) \
+  RGB_TOG, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,    KC_7,    KC_8,    KC_9,   KC_0,    TG(MO(_GAME)), \
+  KC_ESC,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,   KC_F1,   KC_F2,   KC_F3,   KC_Y,   KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
+  KC_TAB,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   KC_F4,   KC_F5,   KC_F6,   KC_H,   KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT, \
+  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_F7,   KC_F8,   KC_F9,   KC_N,   KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT, \
+  _______, _______, _______, _______, KC_LALT, KC_SPC, KC_LCTL, _______, _______, KC_SPC, _______, _______, _______, _______, _______ \
 ),
 [_LOWER] = LAYOUT( 
   _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,    _______,     _______, \
-  _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,    M(WORKUP),   M(WORKDOWN),  _______,     KC_DQT,     _______,\
-  KC_TILD, _______, _______, _______, _______, _______, _______, _______, _______,  M(VIMLEFT), M(VIMDOWN),  M(VIMUP),     M(VIMRIGHT), KC_QUOT,    _______, \
-  KC_PIPE, _______, _______, _______, _______, _______, _______, _______, _______,  _______,    M(FOX_LEFT), M(FOX_RIGHT), _______,     _______,    _______,\
+  _______, KC_GRV,  _______, _______, _______, _______, _______, _______, _______,  _______,    M(WORKUP),   M(WORKDOWN),  _______,     KC_DQT,     _______,\
+  _______, KC_TILD, _______, _______, _______, _______, _______, _______, _______,  M(VIMLEFT), M(VIMDOWN),  M(VIMUP),     M(VIMRIGHT), KC_QUOT,    _______, \
+  _______, KC_PIPE, _______, _______, _______, _______, _______, _______, _______,  _______,    M(FOX_LEFT), M(FOX_RIGHT), _______,     KC_SLSH,    _______,\
   _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______,    _______,     _______,      _______,     _______,    _______\
 ),
 [_RAISE] = LAYOUT( 
@@ -201,7 +202,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_CODE] = LAYOUT( 
   _______, _______, _______, _______, _______, _______, _______, _______, _______,   _______, _______, _______, \
   _______,  code(KC_Q), code(KC_W), code(KC_E), code(KC_R), code(KC_T), code(KC_P7), code(KC_P8), code(KC_P9), code(KC_Y), code(KC_U), code(KC_I),    code(KC_O),   code(KC_P),    _______, \
-  _______,  code(KC_A), code(KC_S), code(KC_D), code(KC_F), code(KC_G), code(KC_P4), code(KC_P5), code(KC_P6), code(KC_H), code(KC_J), code(KC_K),    code(KC_L),   code(KC_SCLN), _______, \
+  _______,  KC_VOLD,    KC_VOLU,    KC_MUTE, code(KC_F), code(KC_G), code(KC_P4), code(KC_P5), code(KC_P6), code(KC_H), code(KC_J), code(KC_K),    code(KC_L),   code(KC_SCLN), _______, \
   _______,  code(KC_Z), code(KC_X), code(KC_C), code(KC_V), code(KC_B), code(KC_P1), code(KC_P2), code(KC_P3), code(KC_N), code(KC_M), code(KC_COMM), code(KC_DOT), code(KC_SLSH), _______, \
   _______, _______, _______, _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, _______\
 ),
@@ -355,6 +356,8 @@ void matrix_scan_user(void) {
     #endif
 }
 
+static uint16_t key_timer;
+
 /*
  * Macro definition
  */
@@ -462,12 +465,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
     case DQT:
         if (record->event.pressed) {
             return MACRO(D(LSFT),T(QUOT),U(LSFT),END);
-        }
-        return false;
-        break;
-    case UNDS:
-        if (record->event.pressed) {
-            return MACRO(D(LSFT),T(MINS),U(LSFT),END);
         }
         return false;
         break;

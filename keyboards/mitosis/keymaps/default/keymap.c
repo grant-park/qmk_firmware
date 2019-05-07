@@ -1,222 +1,291 @@
-// this is the style you want to emulate.
-// This is the canonical layout file for the Quantum project. If you want to add another keyboard,
-
 #include QMK_KEYBOARD_H
 
-// Each layer gets a name for readability, which is then used in the keymap matrix below.
-// The underscores don't mean anything - you can have a layer called STUFF or any other name.
-// Layer names don't all need to be of the same length, obviously, and you can also skip them
-// entirely and just use numbers.
-enum mitosis_layers
-{
-	_MALT,
-	_SHIFTED,
-	_FUNCTION,
-	_FUNCSHIFT
-};
+extern keymap_config_t keymap_config;
 
-enum mitosis_keycodes
-{
-  FNKEY = SAFE_RANGE,
-  SHIFT
-};
-
-
-// Macro definitions for readability
-enum mitosis_macros
-{
-	VOLU,
-	VOLD,
-	ESCM
-};
-
-#define LONGPRESS_DELAY 150
-#define LAYER_TOGGLE_DELAY 300
-
-// Fillers to make layering more clear
 #define _______ KC_TRNS
-#define XXXXXXX KC_NO
+#define USEDKEY KC_TRNS
+#define GUI(X) MT(MOD_LGUI, X)
+#define ALT(X) MT(MOD_LALT, X)
+#define SFT(X) MT(MOD_LSFT, X)
+#define CTL(X) MT(MOD_LCTL, X)
+#define L(X,Y) LT(M(X), Y)
+#define LONGPRESS_DELAY 150
+
+enum layer {
+    // Layers
+    PRIMARY,
+    RAISE,
+    LOWER,
+    MOUSE,
+    ARROWS,
+    MIDDLE,
+    DESKTOP,
+
+    // Symbols
+    UNDS,
+    DQT,
+
+    // Vim
+    VUP,
+    VDOWN,
+    VLEFT,
+    VRIGHT,
+    VQUIT,
+    VSAVE,
+    VQUIT_SAVE,
+
+    // Firefox
+    FLEFT,
+    FRIGHT,
+
+    // IntelliJ
+    CLEAN,
+    SYNC,
+    SEARCH_PROJ,
+    FIND_REPLACE,
+    SEARCH_CLASS,
+    REFORMAT,
+    OPTIMIZE_IMPORTS,
+    STEP_OVER,
+    STEP_INTO,
+    STEP_OUT,
+    RESUME,
+
+    // ChunkWM
+    CHUNK_INC_L,
+    CHUNK_INC_D,
+    CHUNK_INC_U,
+    CHUNK_INC_R,
+    CHUNK_DEC_L,
+    CHUNK_DEC_D,
+    CHUNK_DEC_U,
+    CHUNK_DEC_R,
+};
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-
-  [_MALT] = LAYOUT( /* Malt Layout, customised for reduced columns (ex: quote and shift locations) */
-    KC_Q,    KC_P,    KC_Y,    KC_C,    KC_B,           KC_V,    KC_M,    KC_U,    KC_Z,    KC_L,
-    KC_A,    KC_N,    KC_I,    KC_S,    KC_F,           KC_D,    KC_T,    KC_H,    KC_O,    KC_R,
-    KC_COMM, KC_DOT,  KC_J,    KC_G,    KC_SLSH,        KC_SCLN, KC_W,    KC_K,    KC_QUOT, KC_X,
-             M(VOLU), M(ESCM), KC_TAB,  KC_LCTL,        KC_LALT, KC_ENT,  KC_DEL,  KC_PGUP,
-             M(VOLD), KC_LGUI, KC_E,    FNKEY,          SHIFT,   KC_SPC,  KC_BSPC, KC_PGDN
-  ),
-
-
-  [_SHIFTED] = LAYOUT( /* Shifted Layer, layered so that tri_layer can be used, or selectively
-                                         able to modify individual key's shifted behaviour */
-    _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______,       _______, _______, _______, _______, _______,
-             _______, _______, _______, _______,       _______, _______, _______, _______,
-             _______, _______, _______, _______,       _______, _______, _______, _______
-  ),
-
-
-
-  [_FUNCTION] = LAYOUT( /* Function Layer, primary alternative layer featuring numpad on right hand,
-                                           cursor keys on left hand, and all symbols*/
-    KC_AMPR, KC_PERC, KC_UP,   KC_CIRC, KC_PIPE,       KC_LBRC, KC_7,    KC_8,    KC_9,    KC_MINS,
-    KC_AT,   KC_LEFT, KC_DOWN, KC_RGHT, KC_HASH,       KC_LPRN, KC_4,    KC_5,    KC_6,    KC_PLUS,
-    KC_ASTR, KC_UNDS, KC_EXLM, KC_DLR,  KC_BSLS,       KC_LCBR, KC_1,    KC_2,    KC_3,    KC_ENT,
-             KC_HOME, KC_GRV,  KC_PWR,  _______,       _______, KC_EQL,  KC_TILD, KC_DOT,
-             KC_END,  _______, _______, _______,       _______, KC_0,    _______, KC_PSCR
-  ),
-
-
-  [_FUNCSHIFT] = LAYOUT( /* Function Shifted Layer, secondary alternative layer with closing brackets,
-                                                    and F-keys under their numpad equivalents*/
-    _______, _______, _______, _______, _______,       KC_RBRC, KC_F7,   KC_F8,   KC_F9,   KC_F10,
-    _______, _______, _______, _______, _______,       KC_RPRN, KC_F4,   KC_F5,   KC_F6,   KC_F11,
-    _______, _______, _______, _______, _______,       KC_RCBR, KC_F1,   KC_F2,   KC_F3,   KC_F12,
-             _______, _______, _______, _______,       _______, _______, _______, _______,
-             _______, _______, _______, _______,       _______, _______, _______, _______
-  )
-
-};
-
-
-const uint16_t PROGMEM fn_actions[] = {
-
+    [PRIMARY] = LAYOUT(
+        KC_Q,      KC_W,          KC_E,           KC_R,            KC_T,            KC_Y,            KC_U,            KC_I,           KC_O,    KC_P, \
+        KC_A,      L(MOUSE,KC_S), L(MIDDLE,KC_D), GUI(KC_F),       CTL(KC_G),       CTL(KC_H),       GUI(KC_J),       L(MIDDLE,KC_K), KC_L,    L(ARROWS,KC_SCLN), \
+        M(UNDS),   KC_X,          KC_C,           L(DESKTOP,KC_V), ALT(KC_B),       ALT(KC_N),       L(DESKTOP,KC_M), KC_COMM,        KC_DOT,  SFT(KC_BSLS) , \
+                   _______,       _______,        _______,         L(LOWER,KC_ENT), L(RAISE,KC_SPC), _______,         _______,        _______, \
+                   _______,       _______,        _______,         _______,         _______,         _______,         _______,        _______
+    ), 
+    [LOWER] = LAYOUT(
+        LSFT(KC_Q), LSFT(KC_W), LSFT(KC_E), LSFT(KC_R), LSFT(KC_T), LSFT(KC_Y), LSFT(KC_U), LSFT(KC_I),    LSFT(KC_O),   LSFT(KC_P), \
+        LSFT(KC_A), LSFT(KC_S), LSFT(KC_D), LSFT(KC_F), LSFT(KC_G), LSFT(KC_H), LSFT(KC_J), LSFT(KC_K),    LSFT(KC_L),   LSFT(KC_SCLN), \
+        LSFT(KC_Z), LSFT(KC_X), LSFT(KC_C), LSFT(KC_V), LSFT(KC_B), LSFT(KC_N), LSFT(KC_M), LSFT(KC_COMM), LSFT(KC_DOT), LSFT(KC_SLSH), \
+                    _______,    _______,    _______,    USEDKEY,    KC_BSPC,    _______,    _______,       _______, \
+                    _______,    _______,    _______,    _______,    _______,    _______,    _______,       _______
+    ),
+    [RAISE] = LAYOUT(
+        KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0, \
+        KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, \
+        KC_ESC,  KC_TAB,  KC_PPLS, KC_EQL,  KC_Z,    KC_MINS, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR , \
+                 _______, _______, _______, KC_ESC,  USEDKEY, _______, _______, _______, \
+                 _______, _______, _______, _______, _______, _______, _______, _______
+    ),
+    [MIDDLE] = LAYOUT(
+        KC_GRV,  KC_F1,   KC_F2,   KC_F3,   _______, _______,  _______,  _______,   _______,   M(DQT), \
+        KC_TILD, KC_F4,   KC_F5,   KC_F6,   _______, M(VLEFT), M(VDOWN), M(VUP),    M(VRIGHT), KC_QUOT, \
+        KC_PIPE, KC_F7,   KC_F8,   KC_F9,   _______, _______,  M(FLEFT), M(FRIGHT), _______,   KC_SLSH, \
+                 _______, _______, _______, _______, _______,  _______,  _______,   _______, \
+                 _______, _______, _______, _______, _______,  _______,  _______,   _______
+    ),
+    [MOUSE] = LAYOUT(
+        RESET,   KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R, _______, _______,    KC_MS_UP,   _______,     _______, \
+        KC_ACL0, KC_ACL1, KC_BTN1, KC_BTN2, KC_BTN3, _______, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, _______, \
+        _______, _______, _______, _______, _______, _______, _______,    _______,    _______,     _______, \
+                 _______, _______, _______, _______, _______, _______,    _______,    _______, \
+                 _______, _______, _______, _______, _______, _______,    _______,    _______
+    ),
+    [ARROWS] = LAYOUT(
+        M(VQUIT), M(VSAVE),      _______,         _______,         _______,     _______,             _______,   KC_UP,        _______,       _______, \
+        M(CLEAN), M(SYNC),       M(SEARCH_PROJ),  M(SEARCH_CLASS), M(REFORMAT), M(OPTIMIZE_IMPORTS), KC_LEFT,   KC_DOWN,      KC_RIGHT,      USEDKEY, \
+        _______,  M(VQUIT_SAVE), M(FIND_REPLACE), _______,         _______,     _______,             M(RESUME), M(STEP_OVER), M(STEP_INTO),  M(STEP_OUT), \
+                  _______,       _______,         _______,         _______,     _______,             _______,   _______,      _______, \
+                  _______,       _______,         _______,         _______,     _______,             _______,   _______,      _______
+    ),
+    [DESKTOP] = LAYOUT(
+        LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), LGUI(KC_6),     LGUI(KC_7),     LGUI(KC_8),     LGUI(KC_9),     LGUI(KC_0), \
+        KC_VOLD,    KC_VOLU,    KC_MUTE,    KC_MPRV,    KC_MNXT,    M(CHUNK_INC_L), M(CHUNK_INC_D), M(CHUNK_INC_U), M(CHUNK_INC_R), _______, \
+        KC_SLCK,    KC_PAUS,    KC_MPLY,    _______,    _______,    M(CHUNK_DEC_L), M(CHUNK_DEC_D), M(CHUNK_DEC_U), M(CHUNK_DEC_R), _______, \
+                    _______,    _______,    _______,    _______,    _______,        _______,        _______,        _______, \
+                    _______,    _______,    _______,    _______,    _______,        _______,        _______,        _______
+    )
 };
 
 static uint16_t key_timer;
-
-const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
-{
-  // MACRODOWN only works in this function
+const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
     switch(id) {
-
-      	//switch multiplexing for media, short tap for volume up, long press for play/pause
-        case VOLU:
-            if (record->event.pressed) {
-            	key_timer = timer_read(); // if the key is being pressed, we start the timer.
-          	} else { // this means the key was just released, so we can figure out how long it was pressed for (tap or "held down").
-            	if (timer_elapsed(key_timer) > LONGPRESS_DELAY) { // LONGPRESS_DELAY being 150ms, the threshhold we pick for counting something as a tap.
-                  return MACRO(T(MPLY), END);
+        // Symbols
+	    case UNDS:
+	        if (record->event.pressed) {
+                key_timer = timer_read();
+                register_code(KC_LSFT);
+            } else {
+                if (timer_elapsed(key_timer) > LONGPRESS_DELAY) {
+                    unregister_code(KC_LSFT);
                 } else {
-                  return MACRO(T(VOLU), END);
+                    unregister_code(KC_LSFT);
+	    	        return MACRO(D(LSFT),T(MINS),U(LSFT),END);
                 }
-          	}
-          	break;
+            }
+	        break;
+	    case DQT:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),T(QUOT),U(LSFT),END);
+	        }
+	        break;
 
-		//switch multiplexing for media, short tap for volume down, long press for next track
-        case VOLD:
-            if (record->event.pressed) {
-            	key_timer = timer_read();
-          	} else {
-            	if (timer_elapsed(key_timer) > LONGPRESS_DELAY) {
-                  return MACRO(T(MNXT), END);
-                } else {
-                  return MACRO(T(VOLD), END);
-                }
-          	}
-          	break;
+        // Vim
+        case VUP:
+	        if (record->event.pressed) {
+                return MACRO( T(9), T(K), END);
+            }
+            break;
+        case VDOWN:
+	        if (record->event.pressed) {
+                return MACRO( T(9), T(J), END);
+            }
+            break;
+        case VLEFT:
+	        if (record->event.pressed) {
+                return MACRO( T(9), T(H), END);
+            }
+            break;
+        case VRIGHT:
+	        if (record->event.pressed) {
+                return MACRO( T(9), T(L), END);
+            }
+            break;
+	    case VQUIT:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),T(SCLN),U(LSFT),T(Q),T(ENT),END);
+	        }
+	        break;
+	    case VSAVE:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),T(SCLN),U(LSFT),T(W),T(ENT),END);
+	        }
+	        break;
+	    case VQUIT_SAVE:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),T(SCLN),U(LSFT),T(X),T(ENT),END);
+	        }
+	        break;
+    
+        // Firefox
+        case FLEFT:
+	        if (record->event.pressed) {
+                //return MACRO(D(LCTL),D(LSFT),T(TAB),U(LCTL),U(LSFT),END);
+                return MACRO(D(LGUI),D(LSFT),T(LBRC),U(LGUI),U(LSFT),END);
+            }
+            break;
+        case FRIGHT:
+	        if (record->event.pressed) {
+                //return MACRO(D(LCTL),T(TAB),U(LCTL),END);
+                return MACRO(D(LGUI),D(LSFT),T(RBRC),U(LGUI),U(LSFT),END);
+            }
+            break;
 
-        //switch multiplexing for escape, short tap for escape, long press for context menu
-        case ESCM:
-            if (record->event.pressed) {
-            	key_timer = timer_read();
-          	} else {
-            	if (timer_elapsed(key_timer) > LONGPRESS_DELAY) {
-                  return MACRO(T(APP), END);
-                } else {
-                  return MACRO(T(ESC), END);
-                }
-          	}
-          	break;
+        // IntelliJ
+	    case CLEAN:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(C),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case SYNC:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LALT),T(S),U(LALT),U(LGUI),END);
+	        }
+	        break;
+	    case SEARCH_PROJ:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(F),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case FIND_REPLACE:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(R),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case SEARCH_CLASS:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(O),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case REFORMAT:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LALT),D(LGUI),T(L),U(LALT),U(LGUI),END);
+	        }
+	        break;
+	    case OPTIMIZE_IMPORTS:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LCTL),D(LALT),T(O),U(LALT),U(LCTL),END);
+	        }
+	        break;
+	    case STEP_OVER:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),D(LALT),T(T),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case STEP_INTO:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),D(LALT),T(E),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case STEP_OUT:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),D(LALT),T(Q),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case RESUME:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LSFT),D(LALT),T(R),U(LALT),U(LSFT),END);
+	        }
+	        break;
 
-        break;
+        // ChunkWM
+	    case CHUNK_DEC_L:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(A),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_DEC_D:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(S),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_DEC_U:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(W),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_DEC_R:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LGUI),D(LSFT),T(D),U(LGUI),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_INC_L:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LALT),D(LSFT),T(A),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_INC_D:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LALT),D(LSFT),T(S),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_INC_U:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LALT),D(LSFT),T(W),U(LALT),U(LSFT),END);
+	        }
+	        break;
+	    case CHUNK_INC_R:
+	        if (record->event.pressed) {
+	    	    return MACRO(D(LALT),D(LSFT),T(D),U(LALT),U(LSFT),END);
+	        }
+	        break;
     }
     return MACRO_NONE;
 };
-
-static bool singular_key = false;
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-
-	uint8_t layer;
-  layer = biton32(layer_state);  // get the current layer
-
-  //custom layer handling for tri_layer,
-  switch (keycode) {
-  case FNKEY:
-  	if (record->event.pressed) {
-      key_timer = timer_read();
-      singular_key = true;
-    	layer_on(_FUNCTION);
-  	} else {
-      if (timer_elapsed(key_timer) < LAYER_TOGGLE_DELAY || !singular_key) {
-        layer_off(_FUNCTION);
-      }
-  	}
-    update_tri_layer(_FUNCTION, _SHIFTED, _FUNCSHIFT);
-  	return false;
-  	break;
-  //SHIFT is handled as LSHIFT in the general case
-  case SHIFT:
-  	if (record->event.pressed) {
-      key_timer = timer_read();
-      singular_key = true;
-    	layer_on(_SHIFTED);
-    	register_code(KC_LSFT);
-  	} else {
-    	if (timer_elapsed(key_timer) < LAYER_TOGGLE_DELAY || !singular_key) {
-        layer_off(_SHIFTED);
-    	  unregister_code(KC_LSFT);
-      }
-    }
-    update_tri_layer(_FUNCTION, _SHIFTED, _FUNCSHIFT);
-  	return false;
-  	break;
-
-  //If any other key was pressed during the layer mod hold period,
-  //then the layer mod was used momentarily, and should block latching
-  default:
-    singular_key = false;
-    break;
-  }
-
-  //FUNCSHIFT has been shifted by the SHIFT handling, some keys need to be excluded
-  if (layer == _FUNCSHIFT) {
-  	//F1-F12 should be sent as unshifted keycodes,
-  	//and ] needs to be unshifted or it is sent as }
-  	if ( (keycode >= KC_F1 && keycode <= KC_F12)
-  	   || keycode == KC_RBRC ) {
-  		if (record->event.pressed) {
-              unregister_mods(MOD_LSFT);
-          } else {
-              register_mods(MOD_LSFT);
-          }
-  	}
-  }
-
-  return true;
-};
-
-void matrix_scan_user(void) {
-    uint8_t layer = biton32(layer_state);
-
-    switch (layer) {
-    	case _MALT:
-    		set_led_off;
-    		break;
-        case _FUNCTION:
-            set_led_blue;
-            break;
-        case _SHIFTED:
-            set_led_red;
-            break;
-        case _FUNCSHIFT:
-        	set_led_green;
-        	break;
-        default:
-            break;
-    }
-};
-

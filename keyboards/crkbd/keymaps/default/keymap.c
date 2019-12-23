@@ -37,10 +37,10 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [QWERTY] = {
-	  {KC_ESC,    KC_Q,    KC_W,             KC_E,              KC_R,    KC_T},
-	  {KC_LCTL,   KC_A,    L(MOUSE,KC_S),    L(MIDDLE, KC_D),   KC_F,    KC_G},
-	  {KC_LSFT,   KC_UNDS, KC_X,             KC_C,              KC_V,    KC_B},
-	  {XXXXXXX,   XXXXXXX, XXXXXXX,          KC_LGUI,           MO(LOWER),   KC_ENT},
+	  {KC_ESC,    KC_Q,    KC_W,    KC_E,            KC_R,    KC_T},
+	  {KC_LCTL,   KC_A,    KC_S,    KC_D, KC_F,    KC_G},
+	  {KC_LSFT,   KC_UNDS, KC_X,    KC_C,            KC_V,    KC_B},
+	  {XXXXXXX,   XXXXXXX, XXXXXXX, KC_LGUI,         MO(LOWER),   KC_ENT},
 
 	  {KC_BSPC, KC_P,    KC_O,   KC_I,    KC_U,      KC_Y,   },
           {KC_QUOT, KC_SCLN, KC_L,   KC_K,    KC_J,      KC_H,   },
@@ -49,39 +49,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   },
 
   [LOWER] = {
-	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX},
-	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX},
-	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX},
-          {XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, MO(LOWER), KC_SPC},
-
-          {XXXXXXX, XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX,   XXXXXXX},
-          {XXXXXXX, XXXXXXX, KC_RGHT, KC_DOWN, KC_LEFT,   XXXXXXX},
-          {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX},
-	  {XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT, MO(RAISE), KC_ENT}
-  },
-
-
-  [MIDDLE] = {
-	  {XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
-      	  {XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
-      	  {XXXXXXX, XXXXXXX,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
-      	  {KC_LGUI, MO(LOWER), KC_SPC,  XXXXXXX, XXXXXXX, XXXXXXX},
-
-	  {XXXXXXX, XXXXXXX, XXXXXXX,   KC_UP,     XXXXXXX,   XXXXXXX},
-	  {XXXXXXX, XXXXXXX, M(VRIGHT), M(VUP),    M(VDOWN),  M(VLEFT)},
-	  {XXXXXXX, KC_SLSH, XXXXXXX,   M(FRIGHT), M(FLEFT),  XXXXXXX},
-          {XXXXXXX, XXXXXXX, XXXXXXX,   KC_RALT,   MO(RAISE), KC_ENT}
-  },
-
-  [MOUSE] = {
 	  {XXXXXXX, XXXXXXX, KC_WH_L, KC_WH_U, KC_WH_D,   KC_WH_R},                      
       	  {XXXXXXX, KC_ACL0, XXXXXXX, KC_BTN1, KC_BTN2,   KC_BTN3},                       
       	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX},                      
       	  {XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, MO(LOWER), KC_SPC},
 
-          {XXXXXXX, XXXXXXX, XXXXXXX,     KC_MS_UP,   XXXXXXX,    XXXXXXX},
-          {XXXXXXX, XXXXXXX, KC_MS_RIGHT, KC_MS_DOWN, KC_MS_LEFT, XXXXXXX},
-          {XXXXXXX, XXXXXXX, XXXXXXX,     M(FRIGHT),  M(FLEFT),   XXXXXXX},
+          {M(VRIGHT), M(VLEFT), XXXXXXX,     KC_MS_UP,   XXXXXXX,    M(VUP)},
+	  {M(FRIGHT), M(FLEFT), KC_MS_RIGHT, KC_MS_DOWN, KC_MS_LEFT, M(VDOWN)},
+          {XXXXXXX, XXXXXXX, KC_RGHT,     KC_UP,    KC_DOWN,   KC_LEFT},
           {XXXXXXX, XXXXXXX, XXXXXXX,     KC_RALT,    MO(RAISE),  KC_ENT}
   },
 

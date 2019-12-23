@@ -22,8 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <serial_config.h>
 
 #define USE_I2C
-//#define USE_MATRIX_I2C
-//#define USE_SERIAL
+#define USE_SERIAL
 
 #define MOUSEKEY_INTERVAL       20
 #define MOUSEKEY_DELAY          0

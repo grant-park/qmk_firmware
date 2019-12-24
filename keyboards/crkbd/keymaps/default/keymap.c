@@ -89,12 +89,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   },
 
   [DESKTOP] = {
-	  {GUI(KC_1), GUI(KC_2), GUI(KC_3), GUI(KC_4), GUI(KC_5), GUI(KC_6)},                      
+	  {LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), LGUI(KC_6)},                      
       	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                       
       	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
       	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
 
-	  RH( GUI(KC_7), GUI(KC_8), GUI(KC_9), GUI(KC_0), XXXXXXX, XXXXXXX),                      
+	  RH( LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0), XXXXXXX, XXXXXXX),                      
       	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                       
       	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
       	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX)

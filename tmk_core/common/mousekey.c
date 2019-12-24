@@ -62,7 +62,7 @@ uint8_t mk_wheel_time_to_max = MOUSEKEY_WHEEL_TIME_TO_MAX;
 static uint8_t move_unit(void) {
     uint16_t unit;
     if (mousekey_accel & (1 << 0)) {
-        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed) / 4;
+        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed) / 8;
     } else if (mousekey_accel & (1 << 1)) {
         unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed) / 2;
     } else if (mousekey_accel & (1 << 2)) {

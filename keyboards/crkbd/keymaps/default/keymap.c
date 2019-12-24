@@ -1,27 +1,30 @@
 #include QMK_KEYBOARD_H
 
 
-#ifdef RGBLIGHT_ENABLE
-//Following line allows macro to read current RGB settings
-extern rgblight_config_t rgblight_config;
-#endif
-
 extern uint8_t is_master;
 
 // Each layer gets a name for readability, which is then used in the keymap matrix below.
 // The underscores don't mean anything - you can have a layer called STUFF or any other name.
 // Layer names don't all need to be of the same length, obviously, and you can also skip them
 // entirely and just use numbers.
+#define _______ KC_TRNS
+#define USEDKEY KC_TRNS
+#define GUI(X) MT(MOD_LGUI, X)
+#define ALT(X) MT(MOD_LALT, X)
+#define SFT(X) MT(MOD_LSFT, X)
+#define CTL(X) MT(MOD_LCTL, X)
 #define L(X,Y) LT(M(X), Y)
+#define RH(X0, X1, X2, X3, X4, X5) {X5, X4, X3, X2, X1, X0}
 
 enum custom_keycodes {
   QWERTY,
+  SYMBOLS,
+  RAISE,
   LOWER,
   MIDDLE,
+  ARROWS,
   MOUSE,
-  RAISE,
   BACKLIT,
-  RGBRST,
 
   // macros
   VUP,
@@ -37,40 +40,88 @@ enum custom_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [QWERTY] = {
-	  {KC_ESC,    KC_Q,    KC_W,    KC_E,            KC_R,    KC_T},
-	  {KC_LCTL,   KC_A,    KC_S,    KC_D, KC_F,    KC_G},
-	  {KC_LSFT,   KC_UNDS, KC_X,    KC_C,            KC_V,    KC_B},
-	  {XXXXXXX,   XXXXXXX, XXXXXXX, KC_LGUI,         MO(LOWER),   KC_ENT},
+	  {KC_ESC,    KC_Q,    KC_W,           KC_E,            KC_R,      KC_T        },
+	  {KC_TAB,    KC_A,    L(MOUSE, KC_S), L(MIDDLE, KC_D), GUI(KC_F), CTL(KC_G)   },
+	  {KC_MINS,   KC_Z,    KC_X,           KC_C,            KC_V,      KC_B        },
+	  {XXXXXXX,   XXXXXXX, XXXXXXX,        _______,         KC_LALT,   SFT(KC_ENT) },
 
-	  {KC_BSPC, KC_P,    KC_O,   KC_I,    KC_U,      KC_Y,   },
-          {KC_QUOT, KC_SCLN, KC_L,   KC_K,    KC_J,      KC_H,   },
-          {KC_RSFT, KC_BSLS, KC_DOT, KC_COMM, KC_M,      KC_N,   },
-          {XXXXXXX, XXXXXXX, XXXXXXX,KC_RALT, MO(RAISE), KC_SPC  }
+	  RH( KC_Y,               KC_U,       KC_I,      KC_O,    KC_P,               KC_BSPC   ),
+          RH( CTL(KC_H),          GUI(KC_J),  KC_K,      KC_L,    L(ARROWS, KC_SCLN), KC_QUOT   ),
+          RH( KC_N,               KC_M,       KC_COMM,   KC_DOT,  KC_SLSH,            KC_BSLS   ),
+          RH( L(SYMBOLS, KC_SPC), KC_RALT,    _______,   XXXXXXX, XXXXXXX,            XXXXXXX   )
   },
 
-  [LOWER] = {
-	  {XXXXXXX, XXXXXXX, KC_WH_L, KC_WH_U, KC_WH_D,   KC_WH_R},                      
-      	  {XXXXXXX, KC_ACL0, XXXXXXX, KC_BTN1, KC_BTN2,   KC_BTN3},                       
-      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX},                      
+  [SYMBOLS] = {
+	  {KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,      KC_5},
+      	  {KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,    KC_PERC},
+      	  {_______, _______, _______, KC_PPLS, KC_EQL,    _______},
       	  {XXXXXXX, XXXXXXX, XXXXXXX, KC_LGUI, MO(LOWER), KC_SPC},
 
-          {M(VRIGHT), M(VLEFT), XXXXXXX,     KC_MS_UP,   XXXXXXX,    M(VUP)},
-	  {M(FRIGHT), M(FLEFT), KC_MS_RIGHT, KC_MS_DOWN, KC_MS_LEFT, M(VDOWN)},
-          {XXXXXXX, XXXXXXX, KC_RGHT,     KC_UP,    KC_DOWN,   KC_LEFT},
-          {XXXXXXX, XXXXXXX, XXXXXXX,     KC_RALT,    MO(RAISE),  KC_ENT}
+	  RH( KC_6,    KC_7,      KC_8,     KC_9,    KC_0,     KC_BSPC  ),
+	  RH( KC_CIRC, KC_AMPR,   KC_ASTR,  KC_LPRN, KC_RPRN,  _______  ),
+	  RH( _______, KC_LBRC,   KC_RBRC,  KC_LCBR, KC_RCBR,  _______  ),
+	  RH( KC_ENT,  MO(RAISE), KC_RALT,  XXXXXXX, XXXXXXX,  XXXXXXX  )
+  },
+
+  [ARROWS] = {
+	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                       
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
+
+	  RH( XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX),                      
+      	  RH( XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX),                       
+      	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
+      	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX)
+  },
+
+  [MOUSE] = {
+	  {RESET,   XXXXXXX, KC_WH_L, KC_WH_U, KC_WH_D, KC_WH_R},                      
+      	  {XXXXXXX, KC_ACL0, XXXXXXX, KC_BTN1, KC_BTN2, KC_BTN3},                       
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
+
+	  RH( XXXXXXX, XXXXXXX,    KC_MS_UP,   XXXXXXX,     XXXXXXX, XXXXXXX),                      
+      	  RH( XXXXXXX, KC_MS_LEFT, KC_MS_DOWN, KC_MS_RIGHT, XXXXXXX, XXXXXXX),                       
+      	  RH( XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX, XXXXXXX),                      
+      	  RH( XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX, XXXXXXX)
   },
 
   [RAISE] = {
-	  {KC_ESC,    KC_1,    KC_2,    KC_3,    KC_4,      KC_5},
-      	  {KC_TAB,    KC_EXLM, KC_AT,   KC_HASH, KC_DLR,    KC_PERC},
-      	  {KC_LSFT,   KC_TILD, KC_PIPE, KC_PPLS, KC_EQL,    KC_Z},
-      	  {XXXXXXX,   XXXXXXX, XXXXXXX, KC_LGUI, MO(LOWER), KC_SPC},
+	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                       
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
 
-	  {KC_BSPC, KC_0,    KC_9,    KC_8,    KC_7,       KC_6},
-	  {KC_GRV,  KC_RPRN, KC_LPRN, KC_ASTR, KC_AMPR,    KC_CIRC},
-	  {XXXXXXX, KC_RCBR, KC_LCBR, KC_RBRC, KC_LBRC,    KC_MINS},
-	  {XXXXXXX, XXXXXXX, XXXXXXX,  KC_RALT, MO(RAISE), KC_ENT}
-    }
+	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
+      	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                       
+      	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
+      	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX)
+  },
+
+  [LOWER] = {
+	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                       
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
+
+	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
+      	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                       
+      	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
+      	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX)
+  },
+
+  [MIDDLE] = {
+	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                       
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+      	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
+
+          RH( XXXXXXX,  XXXXXXX,    XXXXXXX,    XXXXXXX,   XXXXXXX, XXXXXXX ),
+	  RH( M(VLEFT), M(VDOWN),   M(VUP),     M(VRIGHT), XXXXXXX, XXXXXXX ),
+          RH( XXXXXXX,  M(FLEFT),   M(FRIGHT),  XXXXXXX,   XXXXXXX, XXXXXXX ),
+          RH( XXXXXXX,  XXXXXXX,    XXXXXXX,    XXXXXXX,   XXXXXXX, XXXXXXX )
+  }
 };
 
 void persistent_default_layer_set(uint16_t default_layer) {

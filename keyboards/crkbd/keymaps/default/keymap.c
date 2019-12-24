@@ -19,6 +19,7 @@ extern uint8_t is_master;
 enum custom_keycodes {
   QWERTY,
   SYMBOLS,
+  DESKTOP,
   RAISE,
   LOWER,
   MIDDLE,
@@ -43,12 +44,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	  {KC_ESC,    KC_Q,    KC_W,           KC_E,            KC_R,      KC_T        },
 	  {KC_TAB,    KC_A,    L(MOUSE, KC_S), L(MIDDLE, KC_D), GUI(KC_F), CTL(KC_G)   },
 	  {KC_MINS,   KC_Z,    KC_X,           KC_C,            KC_V,      KC_B        },
-	  {XXXXXXX,   XXXXXXX, XXXXXXX,        _______,         KC_LALT,   SFT(KC_ENT) },
+	  {XXXXXXX,   XXXXXXX, XXXXXXX,        KC_LALT,         KC_LALT,   SFT(KC_ENT) },
 
-	  RH( KC_Y,               KC_U,       KC_I,      KC_O,    KC_P,               KC_BSPC   ),
-          RH( CTL(KC_H),          GUI(KC_J),  KC_K,      KC_L,    L(ARROWS, KC_SCLN), KC_QUOT   ),
-          RH( KC_N,               KC_M,       KC_COMM,   KC_DOT,  KC_SLSH,            KC_BSLS   ),
-          RH( L(SYMBOLS, KC_SPC), KC_RALT,    _______,   XXXXXXX, XXXXXXX,            XXXXXXX   )
+	  RH( KC_Y,               KC_U,         KC_I,      KC_O,    KC_P,               KC_BSPC   ),
+          RH( CTL(KC_H),          GUI(KC_J),    KC_K,      KC_L,    L(ARROWS, KC_SCLN), KC_QUOT   ),
+          RH( KC_N,               KC_M,         KC_COMM,   KC_DOT,  KC_SLSH,            KC_BSLS   ),
+          RH( L(SYMBOLS, KC_SPC), MO(DESKTOP),  KC_RALT,   XXXXXXX, XXXXXXX,            XXXXXXX   )
   },
 
   [SYMBOLS] = {
@@ -87,13 +88,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       	  RH( XXXXXXX, XXXXXXX,    XXXXXXX,    XXXXXXX,     XXXXXXX, XXXXXXX)
   },
 
-  [RAISE] = {
-	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+  [DESKTOP] = {
+	  {GUI(KC_1), GUI(KC_2), GUI(KC_3), GUI(KC_4), GUI(KC_5), GUI(KC_6)},                      
       	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                       
       	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
       	  {XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
 
-	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
+	  RH( GUI(KC_7), GUI(KC_8), GUI(KC_9), GUI(KC_0), XXXXXXX, XXXXXXX),                      
       	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                       
       	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
       	  RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX)

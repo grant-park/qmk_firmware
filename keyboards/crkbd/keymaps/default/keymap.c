@@ -60,13 +60,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[QWERTY] = {
 		{KC_ESC,    KC_Q,    KC_W,           KC_E,            KC_R,      KC_T        },
 		{KC_TAB,    KC_A,    L(MOUSE, KC_S), L(MIDDLE, KC_D), GUI(KC_F), CTL(KC_G)   },
-		{KC_MINS,   KC_Z,    KC_X,           KC_C,            KC_V,      KC_B        },
+		{KC_MINS,   KC_Z,    KC_X,           KC_C,            KC_V,      ALT(KC_B)   },
 		{XXXXXXX,   XXXXXXX, XXXXXXX,        KC_LALT,         MO(LOWER), SFT(KC_ENT) },
 
-		RH( KC_Y,               KC_U,         KC_I,      KC_O,    KC_P,               KC_BSPC   ),
-		RH( CTL(KC_H),          GUI(KC_J),    KC_K,      KC_L,    L(ARROWS, KC_SCLN), KC_QUOT   ),
-		RH( KC_N,               KC_M,         KC_COMM,   KC_DOT,  KC_SLSH,            KC_BSLS   ),
-		RH( L(SYMBOLS, KC_SPC), MO(DESKTOP),  KC_RALT,   XXXXXXX, XXXXXXX,            XXXXXXX   )
+		RH( KC_Y,               KC_U,           KC_I,        KC_O,    KC_P,               KC_BSPC   ),
+		RH( CTL(KC_H),          GUI(KC_J),      KC_K,        KC_L,    L(ARROWS, KC_SCLN), KC_QUOT   ),
+		RH( ALT(KC_N),          L(RAISE, KC_M), KC_COMM,     KC_DOT,  KC_SLSH,            KC_BSLS   ),
+		RH( L(SYMBOLS, KC_SPC), MO(LOWER),      MO(DESKTOP), XXXXXXX, XXXXXXX,            XXXXXXX   )
 	},
 
 	[SYMBOLS] = {
@@ -82,9 +82,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	},
 
 	[ARROWS] = {
-		{XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
-		{XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                       
-		{XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+		{XXXXXXX, XXXXXXX, KC_F1, KC_F2, KC_F3, XXXXXXX},                      
+		{XXXXXXX, XXXXXXX, KC_F4, KC_F5, KC_F6, XXXXXXX},                       
+		{XXXXXXX, XXXXXXX, KC_F7, KC_F8, KC_F9, XXXXXXX},                      
 		{XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
 
 		RH( XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX),                      
@@ -118,13 +118,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	},
 
 	[LOWER] = {
-		{XXXXXXX, XXXXXXX,  XXXXXXX, M(EXPAND), M(FIND_REPLACE), XXXXXXX},                      
-		{XXXXXXX, M(CLEAN), M(SYNC), M(SEARCH_PROJ), M(SEARCH_CLASS), M(REFORMAT)},                       
-		{XXXXXXX, XXXXXXX,  XXXXXXX, M(COLLAPSE), XXXXXXX, XXXXXXX},                      
+		{XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+		{XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                       
+		{XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
 		{XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
 
 		RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
-		RH( M(OPTIMIZE_IMPORTS), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                       
+		RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                       
+		RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
+		RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX)
+	},
+
+	[RAISE] = {
+		{XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+		{XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                       
+		{XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
+		{XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
+
+		RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
+		RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                       
 		RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX),                      
 		RH( XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX)
 	},
@@ -270,7 +282,6 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 			break;
 
 
-
 		// IntelliJ
 		case CLEAN:
 			if (record->event.pressed) {
@@ -318,8 +329,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 			}
 			break;
 
-
-
+			
 		// ChunkWM
 		case CHUNK_DEC_L:
 			if (record->event.pressed) {

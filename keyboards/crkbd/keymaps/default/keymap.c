@@ -66,7 +66,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 		RH( KC_Y,               KC_U,           KC_I,        KC_O,    KC_P,               KC_BSPC   ),
 		RH( CTL(KC_H),          GUI(KC_J),      KC_K,        KC_L,    L(ARROWS, KC_SCLN), KC_QUOT   ),
 		RH( ALT(KC_N),          L(RAISE, KC_M), KC_COMM,     KC_DOT,  KC_SLSH,            KC_BSLS   ),
-		RH( L(SYMBOLS, KC_SPC), MO(LOWER),      MO(DESKTOP), XXXXXXX, XXXXXXX,            XXXXXXX   )
+		RH( L(SYMBOLS, KC_SPC), MO(DESKTOP),    MO(LOWER), XXXXXXX, XXXXXXX,            XXXXXXX   )
 	},
 
 	[SYMBOLS] = {

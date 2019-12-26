@@ -38,6 +38,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define SELECT_SOFT_SERIAL_SPEED 0
 
+#define OLED_FONT_H "keyboards/crkbd/keymaps/default/grant.c"
+
 #ifdef USE_Link_Time_Optimization
   // LTO has issues with macros (action_get_macro) and "functions" (fn_actions),
   //  so just disable them

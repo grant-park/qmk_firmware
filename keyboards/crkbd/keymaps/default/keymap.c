@@ -60,12 +60,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[QWERTY] = {
 		{KC_ESC,    KC_Q,    KC_W,           KC_E,            KC_R,      KC_T        },
 		{KC_TAB,    KC_A,    L(MOUSE, KC_S), L(MIDDLE, KC_D), GUI(KC_F), CTL(KC_G)   },
-		{KC_MINS,   KC_Z,    KC_X,           KC_C,            KC_V,      ALT(KC_B)   },
+		{KC_MINS,   SFT(KC_Z),    KC_X,           KC_C,            KC_V,      ALT(KC_B)   },
 		{XXXXXXX,   XXXXXXX, XXXXXXX,        KC_LALT,         MO(LOWER), SFT(KC_ENT) },
 
 		RH( KC_Y,               KC_U,           KC_I,        KC_O,    KC_P,               KC_BSPC   ),
 		RH( CTL(KC_H),          GUI(KC_J),      KC_K,        KC_L,    L(ARROWS, KC_SCLN), KC_QUOT   ),
-		RH( ALT(KC_N),          L(RAISE, KC_M), KC_COMM,     KC_DOT,  KC_SLSH,            KC_BSLS   ),
+		RH( ALT(KC_N),          L(RAISE, KC_M), KC_COMM,     KC_DOT,  SFT(KC_SLSH),            KC_BSLS   ),
 		RH( L(SYMBOLS, KC_SPC), MO(DESKTOP),    MO(LOWER), XXXXXXX, XXXXXXX,            XXXXXXX   )
 	},
 
@@ -82,9 +82,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	},
 
 	[ARROWS] = {
-		{XXXXXXX, XXXXXXX, KC_F1, KC_F2, KC_F3, XXXXXXX},                      
-		{XXXXXXX, XXXXXXX, KC_F4, KC_F5, KC_F6, XXXXXXX},                       
-		{XXXXXXX, XXXXXXX, KC_F7, KC_F8, KC_F9, XXXXXXX},                      
+		{KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6},                      
+		{KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12},                       
+		{KC_F13, KC_F14, KC_F15, KC_F16, KC_F17, KC_F18},                      
 		{XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},
 
 		RH( XXXXXXX, XXXXXXX, KC_UP,   XXXXXXX, XXXXXXX, XXXXXXX),                      
@@ -106,7 +106,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	},
 
 	[DESKTOP] = {
-		{LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), LGUI(KC_6)},                      
+		{XXXXXXX, LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5)},                      
 		{XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                       
 		{XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},                      
 		{XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX},

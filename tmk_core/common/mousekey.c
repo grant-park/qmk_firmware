@@ -23,6 +23,9 @@
 #include "debug.h"
 #include "mousekey.h"
 
+#define MOUSEKEY_MOVE_DELAY 0
+#define MOUSEKEY_WHEEL_DELAY 100
+
 inline int8_t times_inv_sqrt2(int8_t x) {
     // 181/256 is pretty close to 1/sqrt(2)
     // 0.70703125                 0.707106781
@@ -63,15 +66,15 @@ uint8_t mk_time_to_max = MOUSEKEY_TIME_TO_MAX;
 uint8_t mk_wheel_delay = MOUSEKEY_WHEEL_DELAY / 10;
 /* milliseconds between repeated motion events (0-255) */
 uint8_t mk_wheel_interval    = MOUSEKEY_WHEEL_INTERVAL;
-uint8_t mk_wheel_max_speed   = MOUSEKEY_WHEEL_MAX_SPEED;
-uint8_t mk_wheel_time_to_max = MOUSEKEY_WHEEL_TIME_TO_MAX;
+uint8_t mk_wheel_max_speed   = MOUSEKEY_WHEEL_MAX_SPEED * 2;
+uint8_t mk_wheel_time_to_max = MOUSEKEY_WHEEL_TIME_TO_MAX / 2;
 
 #    ifndef MK_COMBINED
 
 static uint8_t move_unit(void) {
     uint16_t unit;
     if (mousekey_accel & (1 << 0)) {
-        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed) / 4;
+        unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed) / 9;
     } else if (mousekey_accel & (1 << 1)) {
         unit = (MOUSEKEY_MOVE_DELTA * mk_max_speed) / 2;
     } else if (mousekey_accel & (1 << 2)) {

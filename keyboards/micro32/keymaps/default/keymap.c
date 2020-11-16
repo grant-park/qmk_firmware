@@ -40,10 +40,10 @@ enum micro32_keycodes {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [PRIMARY] = KEYMAP(
-        KC_Q,    KC_W,          KC_E,           KC_R,            KC_T,            KC_Y,      KC_U,            KC_I,           KC_O,   KC_P,              \
-        KC_A,    L(MOUSE,KC_S), L(MIDDLE,KC_D), GUI(KC_F),       CTL(KC_G),       CTL(KC_H), GUI(KC_J),       L(MIDDLE,KC_K), KC_L,   L(ARROWS,KC_SCLN), \
-        M(UNDS), KC_X,          KC_C,           L(DESKTOP,KC_V), ALT(KC_B),       ALT(KC_N), L(DESKTOP,KC_M), KC_COMM,        KC_DOT, SFT(KC_SLSH),      \
-                                                                 L(LOWER,KC_ENT), L(RAISE,KC_SPC)
+        KC_Q,      KC_W,          KC_E,           KC_R,            KC_T,            KC_Y,      KC_U,            KC_I,           KC_O,   KC_P,              \
+        KC_A,      L(MOUSE,KC_S), L(MIDDLE,KC_D), GUI(KC_F),       CTL(KC_G),       CTL(KC_H), GUI(KC_J),       L(MIDDLE,KC_K), KC_L,   L(ARROWS,KC_SCLN), \
+        SFT(KC_Z), KC_X,          KC_C,           L(DESKTOP,KC_V), ALT(KC_B),       ALT(KC_N), L(DESKTOP,KC_M), KC_COMM,        KC_DOT, SFT(KC_SLSH),      \
+                                                                   L(LOWER,KC_ENT), L(RAISE,KC_SPC)
     ), 
     [LOWER] = KEYMAP(
         LSFT(KC_Q), LSFT(KC_W), LSFT(KC_E), LSFT(KC_R), LSFT(KC_T), LSFT(KC_Y), LSFT(KC_U), LSFT(KC_I),    LSFT(KC_O),   LSFT(KC_P),    \
@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [RAISE] = KEYMAP(
         KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    \
         KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, \
-        KC_ESC,  KC_TAB,  KC_PPLS, KC_EQL,  KC_Z,    KC_MINS, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, \
+        KC_ESC,  KC_TAB,  KC_PPLS, KC_EQL,  KC_UNDS, KC_MINS, KC_LBRC, KC_RBRC, KC_LCBR, KC_RCBR, \
                                             KC_ESC,  USEDKEY
     ),
     [MIDDLE] = KEYMAP(
@@ -70,10 +70,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             _______, _______
     ),
     [ARROWS] = KEYMAP(
-        KC_F1,  KC_F2,  KC_F3,   KC_F4,   KC_F5, _______, _______, KC_UP,   _______,  _______,           \
-        KC_F6,  KC_F7,  KC_F8,   KC_F9,   KC_F10,_______, KC_LEFT, KC_DOWN, KC_RIGHT, USEDKEY,           \
-        KC_F11, KC_F12, _______, _______, _______,        _______, _______, _______,  _______, _______,  \
-                                                                   _______,     _______
+        KC_F1,  KC_F2,  KC_F3,   KC_F4,   KC_F5,   _______, _______, KC_UP,   _______,  _______, \
+        KC_F6,  KC_F7,  KC_F8,   KC_F9,   KC_F10,  _______, KC_LEFT, KC_DOWN, KC_RIGHT, USEDKEY, \
+        KC_F11, KC_F12, _______, _______, _______, _______, _______, _______,  _______, _______, \
+                                          _______, _______
     ),
     [DESKTOP] = KEYMAP(
         LGUI(KC_1), LGUI(KC_2), LGUI(KC_3), LGUI(KC_4), LGUI(KC_5), LGUI(KC_6), LGUI(KC_7), LGUI(KC_8), LGUI(KC_9), LGUI(KC_0), \
@@ -100,7 +100,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 			}
 			break;
 
-			// Vim
+		// Vim
 		case VUP:
 			if (record->event.pressed) {
 				return MACRO( T(9), T(K), END);
@@ -137,7 +137,7 @@ const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt) {
 			}
 			break;
 
-			// Firefox
+		// Firefox
 		case FLEFT:
 			if (record->event.pressed) {
 				return MACRO(D(LCTL),D(LSFT),T(TAB),U(LCTL),U(LSFT),END);
